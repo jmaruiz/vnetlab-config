@@ -3,21 +3,30 @@ import java.io.*;
 import java.util.*;
 
 public class Parser {
-    public static void main(String [] args) {
 
+    public static void main(String [] args){
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader("network1.cfg");
+            Parser.parse(fileReader);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Issue opening file, " + ex.getMessage());
+        }
+    }
+    
+    public static void parse(FileReader file) {
         // This will reference one line at a time
         String line, param, value, curType, curName;
         String[] lineRead;
         HashMap<String, NetworkItem> itemsMap = new HashMap<>();
-        NetworkItem curMapItem = null;
+        NetworkItem curMapItem = new NetworkItem(null, null);
         Boolean findObjects = true;
 
         try {
             // FileReader reads text files in the default encoding.
-            FileReader fileReader = new FileReader("network1.cfg");
 
             // Always wrap FileReader in BufferedReader.
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(file);
 
             while((line = bufferedReader.readLine()) != null) {
                 //System.out.println(line);
