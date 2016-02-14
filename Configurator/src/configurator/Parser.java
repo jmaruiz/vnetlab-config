@@ -107,10 +107,10 @@ public class Parser {
     } 
     
     public static void printMap(Map map) {
-       for (Object name: map.keySet()){
+        map.keySet().stream().forEach((name) -> {
             String key = name.toString();
             String value = map.get(name).toString();
-            System.out.println(key + " " + value);  
-        }
+            System.out.println(key + " " + value);
+        });
     }
 }

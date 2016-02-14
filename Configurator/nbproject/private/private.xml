@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/NetworkItem.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/network2.cfg</file>
             <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/Parser.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/network1.cfg</file>
             <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/MainWindow1.java</file>
+            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/configFilter.java</file>
         </group>
     </open-files>
 </project-private>

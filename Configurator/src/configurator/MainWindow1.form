@@ -5,6 +5,9 @@
     <Component class="javax.swing.JFileChooser" name="fileChooser">
       <Properties>
         <Property name="dialogTitle" type="java.lang.String" value="Open a configuration file..."/>
+        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new configFilter()" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar">

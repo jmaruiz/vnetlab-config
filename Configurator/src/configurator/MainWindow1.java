@@ -40,6 +40,7 @@ public class MainWindow1 extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         fileChooser.setDialogTitle("Open a configuration file...");
+        fileChooser.setFileFilter(new configFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
