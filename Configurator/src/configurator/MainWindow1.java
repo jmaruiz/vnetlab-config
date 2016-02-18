@@ -168,6 +168,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
         JFrame frame = new JFrame("InputDialog Example #2");
         String name = JOptionPane.showInputDialog(frame, "What's your name?");
+        System.out.println(name);
     }//GEN-LAST:event_newVmActionPerformed
 
     /**
