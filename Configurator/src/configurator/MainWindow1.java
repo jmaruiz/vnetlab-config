@@ -6,7 +6,10 @@
 package configurator;
 
 import java.io.*;
+import java.util.*;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +34,9 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
+        jPanel1 = new javax.swing.JPanel();
+        newVm = new javax.swing.JButton();
+        newHub = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -42,7 +48,27 @@ public class MainWindow1 extends javax.swing.JFrame {
         fileChooser.setDialogTitle("Open a configuration file...");
         fileChooser.setFileFilter(new configFilter());
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        newVm.setText("New VM");
+        newVm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newVmActionPerformed(evt);
+            }
+        });
+
+        newHub.setText("New Hub");
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -87,16 +113,38 @@ public class MainWindow1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newVm)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newHub)
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newVm)
+                    .addComponent(newHub))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    HashMap<String, NetworkItem> itemsMap = new HashMap<>();
+    
+    public void createVM(String name) {
+        NetworkItem item = new NetworkItem("vm", name);
+        itemsMap.put(name, item);
+    }
+    
+    public void createHub(String name) {
+        NetworkItem item = new NetworkItem("hub", name);
+        itemsMap.put(name, item);
+    }
+    
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
@@ -116,6 +164,11 @@ public class MainWindow1 extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
+        JFrame frame = new JFrame("InputDialog Example #2");
+        String name = JOptionPane.showInputDialog(frame, "What's your name?");
+    }//GEN-LAST:event_newVmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +211,10 @@ public class MainWindow1 extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton newHub;
+    private javax.swing.JButton newVm;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     // End of variables declaration//GEN-END:variables

@@ -2,3 +2,6 @@ Configurator/nbproject/private/private.xml
 Configurator/nbproject/private/private.properties
 Configurator/nbproject/private/private.xml
 Configurator/nbproject/private/private.properties
+*.properties
+
+*.xml
