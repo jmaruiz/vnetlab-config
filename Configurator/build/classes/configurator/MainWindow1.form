@@ -71,6 +71,9 @@
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="About"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -105,7 +108,7 @@
               <Component id="newVm" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="newHub" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="317" max="32767" attributes="0"/>
+              <EmptySpace pref="457" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +120,7 @@
                   <Component id="newVm" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newHub" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="292" max="32767" attributes="0"/>
+              <EmptySpace pref="387" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,6 +138,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="New Hub"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newHubActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

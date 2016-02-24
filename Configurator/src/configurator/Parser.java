@@ -14,7 +14,7 @@ public class Parser {
         }
     }
     
-    public static void parse(FileReader file) {
+    public static HashMap<String, NetworkItem> parse(FileReader file) {
         // This will reference one line at a time
         String line, param, value, curType, curName;
         String[] lineRead;
@@ -51,7 +51,7 @@ public class Parser {
                         //System.out.println("Length incorrect. Actual length: " + lineRead.length);
                     }
                 } else {
-                    System.out.println(line.trim());
+                    //System.out.println(line.trim());
                     lineRead = line.trim().split(":");
                    if (lineRead.length == 2) {
                         param = lineRead[0].trim();
@@ -100,9 +100,11 @@ public class Parser {
             // Always close files.
             bufferedReader.close();
             printMap(itemsMap);
+            return itemsMap;
         }
         catch(IOException ex) {
             System.out.println(ex.getMessage());
+            return null;
         }
     } 
     

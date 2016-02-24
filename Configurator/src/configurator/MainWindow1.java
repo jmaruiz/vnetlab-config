@@ -69,6 +69,11 @@ public class MainWindow1 extends javax.swing.JFrame {
         });
 
         newHub.setText("New Hub");
+        newHub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newHubActionPerformed(evt);
+            }
+        });
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -103,6 +108,11 @@ public class MainWindow1 extends javax.swing.JFrame {
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -118,7 +128,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addComponent(newVm)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newHub)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(457, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +137,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVm)
                     .addComponent(newHub))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(387, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,13 +145,8 @@ public class MainWindow1 extends javax.swing.JFrame {
     
     HashMap<String, NetworkItem> itemsMap = new HashMap<>();
     
-    public void createVM(String name) {
-        NetworkItem item = new NetworkItem("vm", name);
-        itemsMap.put(name, item);
-    }
-    
-    public void createHub(String name) {
-        NetworkItem item = new NetworkItem("hub", name);
+    public void createNetItem(String name, String type) {
+        NetworkItem item = new NetworkItem(type, name);
         itemsMap.put(name, item);
     }
     
@@ -156,9 +161,9 @@ public class MainWindow1 extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             try {
               // What to do with the file, e.g. display it in a TextArea
-              Parser.parse( new FileReader( file.getAbsolutePath() ));
+              itemsMap = Parser.parse(new FileReader( file.getAbsolutePath() ));
             } catch (IOException ex) {
-              System.out.println("problem accessing file "+file.getAbsolutePath());
+              System.out.println("problem accessing file " + file.getAbsolutePath());
             }
         } else {
             System.out.println("File access cancelled by user.");
@@ -166,10 +171,29 @@ public class MainWindow1 extends javax.swing.JFrame {
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
-        JFrame frame = new JFrame("InputDialog Example #2");
-        String name = JOptionPane.showInputDialog(frame, "What's your name?");
-        System.out.println(name);
+        JFrame frame = new JFrame("Create a new vm");
+        String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        if (name != null && !name.equals("")){
+            createNetItem("vm", name);
+        }
     }//GEN-LAST:event_newVmActionPerformed
+
+    private void newHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHubActionPerformed
+        JFrame frame = new JFrame("Create a new hub");
+        String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        if (name != null && !name.equals("")){
+            createNetItem("hub", name);
+        }
+    }//GEN-LAST:event_newHubActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        JFrame frame = new JFrame("About Configurator");
+        String aboutString = 
+            "This app was created and programmed for CSET 3600 (University of Toledo)\n"
+          + "Group 4 consists of the following:\n"
+          + "Jose Ruiz\nEdison Williams\nJeff Wang\nAlex Borger\nCharles Hempstead\n";
+        JOptionPane.showMessageDialog(frame, aboutString);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
