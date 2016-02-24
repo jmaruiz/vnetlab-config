@@ -7,6 +7,8 @@ package configurator;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -90,6 +92,11 @@ public class MainWindow1 extends javax.swing.JFrame {
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Save As ...");
         saveAsMenuItem.setDisplayedMnemonicIndex(5);
+        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveAsMenuItem);
 
         exitMenuItem.setMnemonic('x');
@@ -145,7 +152,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     
     HashMap<String, NetworkItem> itemsMap = new HashMap<>();
     
-    public void createNetItem(String name, String type) {
+    public void createNetItem(String type, String name) {
         NetworkItem item = new NetworkItem(type, name);
         itemsMap.put(name, item);
     }
@@ -194,6 +201,32 @@ public class MainWindow1 extends javax.swing.JFrame {
           + "Jose Ruiz\nEdison Williams\nJeff Wang\nAlex Borger\nCharles Hempstead\n";
         JOptionPane.showMessageDialog(frame, aboutString);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        Writer writer = new Writer();
+        String finalstr;
+        finalstr = "";
+        
+        int returnVal = fileChooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            
+            for (NetworkItem item : itemsMap.values()) {
+                item.os = "Linux"; item.ver = "7.5"; item.src = "/srv/VMLibrary/JeOS"; // test purposes to add variables
+                finalstr += item.generateString();
+            }
+            
+            try {
+                configurator.Writer.writeCfg(finalstr, new File(file.getAbsolutePath() ));
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindow1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+        
+        
+    }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

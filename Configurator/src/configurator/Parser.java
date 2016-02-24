@@ -55,7 +55,7 @@ public class Parser {
                     lineRead = line.trim().split(":");
                    if (lineRead.length == 2) {
                         param = lineRead[0].trim();
-                        value = lineRead[1].trim();
+                        value = lineRead[1].trim().replace("\"", "");
                         try {
                             switch(param) {
                                 case "os":
