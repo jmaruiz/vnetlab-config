@@ -19,13 +19,12 @@ public class Parser {
         String line, param, value, curType, curName;
         String[] lineRead;
         HashMap<String, NetworkItem> itemsMap = new HashMap<>();
+        HashMap<String, String> solutionMap = new HashMap<>();
         NetworkItem curMapItem = new NetworkItem(null, null);
         Boolean findObjects = true;
+        Boolean findSolutions = false;
 
         try {
-            // FileReader reads text files in the default encoding.
-
-            // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(file);
 
             while((line = bufferedReader.readLine()) != null) {
@@ -41,19 +40,34 @@ public class Parser {
                             curMapItem = itemsMap.get(curName);
                             findObjects = false;
                         } else {
-
+                            System.out.println("Invalid object opening statement.");
                         }
                     } else if (lineRead.length == 2 && lineRead[0].contains("partial_solution")){
-                        //System.out.println("END FOUND");
+                        //partial solution line read, go to next section
+                        findObjects = false;
+                        findSolutions = true;
                     } else if (line.trim().equals("")) {
-                        //System.out.println("Blank line.");
+                        //System.out.println("Blank line found.");
                     } else {
-                        //System.out.println("Length incorrect. Actual length: " + lineRead.length);
+                        System.out.println("Length incorrect. Actual length: " + lineRead.length);
+                    }
+                } else if (findSolutions){
+                    line = line.trim().replaceAll("[(),]", "");
+                    lineRead = line.split(" ");
+                    if (lineRead.length == 2) {
+                        param = lineRead[0];
+                        value = lineRead[1];
+                        //System.out.println(param + " " + value);
+                        solutionMap.put(param, value); //puts into map (Gemini.eth0 , v2.vinf21)
+                        
+                        /* NOT SURE IF NEEDED
+                        String[] paramSplit = param.split("."); //split Gemini.eth0 into [Gemini, eth0]
+                        curMapItem = itemsMap.get(paramSplit[0]); //gets item based on name above
+                        */
                     }
                 } else {
-                    //System.out.println(line.trim());
                     lineRead = line.trim().split(":");
-                   if (lineRead.length == 2) {
+                    if (lineRead.length == 2) {
                         param = lineRead[0].trim();
                         value = lineRead[1].trim().replace("\"", "");
                         try {
@@ -100,6 +114,7 @@ public class Parser {
             // Always close files.
             bufferedReader.close();
             printMap(itemsMap);
+            printMap(solutionMap);
             return itemsMap;
         }
         catch(IOException ex) {
