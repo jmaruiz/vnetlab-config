@@ -1,6 +1,7 @@
 package configurator;
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Parser {
 
@@ -20,7 +21,7 @@ public class Parser {
         String[] lineRead;
         HashMap<String, NetworkItem> itemsMap = new HashMap<>();
         HashMap<String, String> solutionMap = new HashMap<>();
-        NetworkItem curMapItem = new NetworkItem(null, null);
+        NetworkItem curMapItem = new NetworkItem("null", "null");
         Boolean findObjects = true;
         Boolean findSolutions = false;
 
@@ -60,10 +61,9 @@ public class Parser {
                         //System.out.println(param + " " + value);
                         solutionMap.put(param, value); //puts into map (Gemini.eth0 , v2.vinf21)
                         
-                        /* NOT SURE IF NEEDED
-                        String[] paramSplit = param.split("."); //split Gemini.eth0 into [Gemini, eth0]
+                        String[] paramSplit = param.split(Pattern.quote(".")); //split Gemini.eth0 into [Gemini, eth0]
                         curMapItem = itemsMap.get(paramSplit[0]); //gets item based on name above
-                        */
+                        curMapItem.addConn(paramSplit[1], value);
                     }
                 } else {
                     lineRead = line.trim().split(":");

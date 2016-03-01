@@ -1,12 +1,21 @@
 
 package configurator;
 
+import java.util.HashMap;
+
 public class NetworkItem {
-    public String type, name, os, ver, src, eth0, eth1, eth2, inf, subnet, netmask;
+    public String type, name, os, ver, src, eth0, eth1, eth2, inf, subnet, netmask, internal;
+    public static int hubNum = 21;
+    public HashMap<String, String> connections = new HashMap<>();
     
     NetworkItem (String t, String n) {
         this.type = t;
         this.name = n;
+        if (!t.equals("null") && t.equals("hub")) {
+            this.internal = "vinf" + hubNum;
+            hubNum++;
+            //System.out.println(this.internal);
+        }
         System.out.println("New object created: " + this.type + " - " + this.name);
     }
     
@@ -25,5 +34,10 @@ public class NetworkItem {
         finalstr += "}\n";
         
         return finalstr;
+    }
+    
+    public void addConn(String param, String conn) {
+        connections.put(param, conn);
+        //System.out.println("Added solution " + param + ", " + conn + " to object " + this.name);
     }
 }

@@ -37,8 +37,13 @@ public class MainWindow1 extends javax.swing.JFrame {
 
         fileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         newVm = new javax.swing.JButton();
         newHub = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        consoleLbl = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -61,6 +66,10 @@ public class MainWindow1 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         newVm.setText("New VM");
@@ -76,6 +85,8 @@ public class MainWindow1 extends javax.swing.JFrame {
                 newHubActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Console:");
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -132,10 +143,18 @@ public class MainWindow1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newVm)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(newHub)
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(newVm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newHub)
+                        .addGap(0, 447, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +163,13 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVm)
                     .addComponent(newHub))
-                .addContainerGap(387, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(consoleLbl))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,16 +205,26 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
         JFrame frame = new JFrame("Create a new vm");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        consoleLbl.setText("");
         if (name != null && !name.equals("")){
-            createNetItem("vm", name);
+            if (itemsMap.get(name) != null) {
+                consoleLbl.setText("ERROR - network item with that name already exists!");
+            } else {
+                createNetItem("vm", name);
+            }
         }
     }//GEN-LAST:event_newVmActionPerformed
 
     private void newHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHubActionPerformed
         JFrame frame = new JFrame("Create a new hub");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        consoleLbl.setText("");
         if (name != null && !name.equals("")){
-            createNetItem("hub", name);
+            if (itemsMap.get(name) != null) {
+                consoleLbl.setText("ERROR - network item with that name already exists!");
+            } else {
+                createNetItem("hub", name);
+            }
         }
     }//GEN-LAST:event_newHubActionPerformed
 
@@ -265,11 +300,16 @@ public class MainWindow1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JLabel consoleLbl;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newHub;
     private javax.swing.JButton newVm;
