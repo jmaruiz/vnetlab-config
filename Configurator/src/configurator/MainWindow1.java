@@ -205,6 +205,9 @@ public class MainWindow1 extends javax.swing.JFrame {
             try {
               // What to do with the file, e.g. display it in a TextArea
               itemsMap = Parser.parse(new FileReader( file.getAbsolutePath() ));
+              for (NetworkItem item : itemsMap.values()) {
+                  publishItem(item);
+              }
             } catch (IOException ex) {
               System.out.println("problem accessing file " + file.getAbsolutePath());
             }
