@@ -5,13 +5,12 @@
  */
 package configurator;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -36,14 +35,12 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         newVm = new javax.swing.JButton();
         newHub = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
         consoleLbl = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -54,21 +51,6 @@ public class MainWindow1 extends javax.swing.JFrame {
 
         fileChooser.setDialogTitle("Open a configuration file...");
         fileChooser.setFileFilter(new configFilter());
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +69,19 @@ public class MainWindow1 extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Console:");
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 693, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 432, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(mainPanel);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -144,15 +139,15 @@ public class MainWindow1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newVm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newHub)
-                        .addGap(0, 447, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -164,22 +159,38 @@ public class MainWindow1 extends javax.swing.JFrame {
                     .addComponent(newVm)
                     .addComponent(newHub))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(consoleLbl))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     HashMap<String, NetworkItem> itemsMap = new HashMap<>();
+    ImageIcon vmIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/vm.jpg"));
+    ImageIcon hubIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/hub.jpg"));
     
     public void createNetItem(String type, String name) {
         NetworkItem item = new NetworkItem(type, name);
         itemsMap.put(name, item);
+        publishItem(item);
+    }
+    
+    public void publishItem(NetworkItem item) {
+        System.out.println("publish called");
+        mainPanel.setLayout(new BoxLayout(mainPanel, 1));
+        JButton button = new JButton(item.name);
+        if (item.type.equals("vm")) { button.setIcon(vmIcon); }
+        else if (item.type.equals("hub")) { button.setIcon(hubIcon); }
+        mainPanel.add(button);
+        mainPanel.revalidate();
+        validate();
     }
     
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -205,6 +216,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
         JFrame frame = new JFrame("Create a new vm");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        name = name.replaceAll("\\s+","");
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
             if (itemsMap.get(name) != null) {
@@ -218,6 +230,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHubActionPerformed
         JFrame frame = new JFrame("Create a new hub");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
+        name = name.replaceAll("\\s+","");
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
             if (itemsMap.get(name) != null) {
@@ -306,10 +319,8 @@ public class MainWindow1 extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newHub;
     private javax.swing.JButton newVm;

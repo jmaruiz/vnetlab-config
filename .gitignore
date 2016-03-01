@@ -5,3 +5,4 @@ Configurator/nbproject/private/private.properties
 *.properties
 
 *.xml
+/Configurator/dist/
