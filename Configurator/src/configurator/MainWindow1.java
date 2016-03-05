@@ -6,6 +6,8 @@
 package configurator;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -39,8 +41,9 @@ public class MainWindow1 extends javax.swing.JFrame {
         newHub = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         consoleLbl = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scroller = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
+        deleteButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -70,18 +73,28 @@ public class MainWindow1 extends javax.swing.JFrame {
 
         jLabel1.setText("Console:");
 
+        mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mainPanel.setPreferredSize(new java.awt.Dimension(500, 400));
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 693, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        jScrollPane2.setViewportView(mainPanel);
+        scroller.setViewportView(mainPanel);
+
+        deleteButton.setText("Delete Item");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -139,16 +152,17 @@ public class MainWindow1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addComponent(scroller, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newVm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newHub)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -157,10 +171,11 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVm)
-                    .addComponent(newHub))
+                    .addComponent(newHub)
+                    .addComponent(deleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scroller, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -173,6 +188,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     HashMap<String, NetworkItem> itemsMap = new HashMap<>();
+    HashMap<String, JButton> buttonsMap = new HashMap<>();
     ImageIcon vmIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/vm.jpg"));
     ImageIcon hubIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/hub.jpg"));
     
@@ -183,9 +199,24 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void publishItem(NetworkItem item) {
-        System.out.println("publish called");
-        mainPanel.setLayout(new BoxLayout(mainPanel, 1));
+        mainPanel.setLayout(new FlowLayout(1, 1, 1));
         JButton button = new JButton(item.name);
+        buttonsMap.put(item.name, button);
+        NetworkItem net = itemsMap.get(item.name);
+        button.addActionListener(new ActionListener(){
+          @Override
+          public void actionPerformed(ActionEvent e){
+            System.out.println(net.name);
+            EditWindow editor = new EditWindow();
+            editor.changeName(net.name); editor.changeOs(net.os); 
+            editor.changeVer(net.ver); editor.changeSrc(net.src); 
+            editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
+            editor.changeEth2(net.eth2); editor.changeInf(net.inf);
+            editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
+            editor.setNetItem(net);
+            editor.setVisible(true);
+          }
+        });
         if (item.type.equals("vm")) { button.setIcon(vmIcon); }
         else if (item.type.equals("hub")) { button.setIcon(hubIcon); }
         mainPanel.add(button);
@@ -279,6 +310,24 @@ public class MainWindow1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        JFrame frame = new JFrame("Delete an item");
+        String name = JOptionPane.showInputDialog(frame, "Enter the name of the network item you want to delete:");
+        name = name.replaceAll("\\s+","");
+        consoleLbl.setText("");
+        if (name != null && !name.equals("")){
+            if (itemsMap.get(name) != null) {
+                mainPanel.remove(buttonsMap.get(name));
+                mainPanel.revalidate();
+                mainPanel.repaint();
+                itemsMap.remove(name);
+                consoleLbl.setText(name + " has been successfully removed");
+            } else {
+                consoleLbl.setText("ERROR - network item with that name does not exist!");
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -317,18 +366,19 @@ public class MainWindow1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel consoleLbl;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newHub;
     private javax.swing.JButton newVm;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JScrollPane scroller;
     // End of variables declaration//GEN-END:variables
 
 }
