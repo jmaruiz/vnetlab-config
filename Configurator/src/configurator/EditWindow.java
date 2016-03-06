@@ -16,8 +16,9 @@ public class EditWindow extends javax.swing.JFrame {
     /**
      * Creates new form EditWindow
      */
-    public EditWindow() {
+    public EditWindow(MainWindow1 main) {
         initComponents();
+        mainWindow = main;
     }
 
     /**
@@ -71,6 +72,11 @@ public class EditWindow extends javax.swing.JFrame {
         jLabel7.setText("eth2:");
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -177,15 +183,19 @@ public class EditWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
     NetworkItem netItem = null;
     MainWindow1 mainWindow = null;
-    
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+        setNetItemProps();
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,7 +227,7 @@ public class EditWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditWindow().setVisible(true);
+                new EditWindow(null).setVisible(true);
             }
         });
     }
@@ -255,6 +265,22 @@ public class EditWindow extends javax.swing.JFrame {
     }
     public void changeMask(String newText) {
         maskField.setText(newText);
+    }
+    
+    public void setNetItemProps() {
+        netItem.ver = this.verField.getText();
+        netItem.src = this.srcField.getText();
+        netItem.os = this.osField.getText();
+        netItem.eth0 = this.eth0Field.getText();
+        netItem.eth1 = this.eth1Field.getText();
+        netItem.eth2 = this.eth2Field.getText();
+        
+        netItem.inf = this.infField.getText();
+        netItem.subnet = this.subnetField.getText();
+        netItem.netmask = this.maskField.getText();
+        
+        mainWindow.setConsole(netItem.name + " has been updated.");
+        this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

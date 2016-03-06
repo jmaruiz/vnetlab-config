@@ -203,11 +203,12 @@ public class MainWindow1 extends javax.swing.JFrame {
         JButton button = new JButton(item.name);
         buttonsMap.put(item.name, button);
         NetworkItem net = itemsMap.get(item.name);
+        MainWindow1 main = this;
         button.addActionListener(new ActionListener(){
           @Override
           public void actionPerformed(ActionEvent e){
-            System.out.println(net.name);
-            EditWindow editor = new EditWindow();
+            //System.out.println(net.name);
+            EditWindow editor = new EditWindow(main);
             editor.changeName(net.name); editor.changeOs(net.os); 
             editor.changeVer(net.ver); editor.changeSrc(net.src); 
             editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
@@ -222,6 +223,10 @@ public class MainWindow1 extends javax.swing.JFrame {
         mainPanel.add(button);
         mainPanel.revalidate();
         validate();
+    }
+    
+    public void setConsole(String text) {
+        consoleLbl.setText(text);
     }
     
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -250,9 +255,9 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
         JFrame frame = new JFrame("Create a new vm");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
-        name = name.replaceAll("\\s+","");
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
+            name = name.replaceAll("\\s+","");
             if (itemsMap.get(name) != null) {
                 consoleLbl.setText("ERROR - network item with that name already exists!");
             } else {
@@ -264,9 +269,9 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void newHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHubActionPerformed
         JFrame frame = new JFrame("Create a new hub");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
-        name = name.replaceAll("\\s+","");
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
+            name = name.replaceAll("\\s+","");
             if (itemsMap.get(name) != null) {
                 consoleLbl.setText("ERROR - network item with that name already exists!");
             } else {
@@ -294,7 +299,7 @@ public class MainWindow1 extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             
             for (NetworkItem item : itemsMap.values()) {
-                item.os = "Linux"; item.ver = "7.5"; item.src = "/srv/VMLibrary/JeOS"; // test purposes to add variables
+                //item.os = "Linux"; item.ver = "7.5"; item.src = "/srv/VMLibrary/JeOS"; // test purposes to add variables
                 finalstr += item.generateString();
             }
             
@@ -313,9 +318,9 @@ public class MainWindow1 extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         JFrame frame = new JFrame("Delete an item");
         String name = JOptionPane.showInputDialog(frame, "Enter the name of the network item you want to delete:");
-        name = name.replaceAll("\\s+","");
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
+            name = name.replaceAll("\\s+","");
             if (itemsMap.get(name) != null) {
                 mainPanel.remove(buttonsMap.get(name));
                 mainPanel.revalidate();
