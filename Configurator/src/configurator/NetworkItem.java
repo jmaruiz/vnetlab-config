@@ -36,8 +36,21 @@ public class NetworkItem {
         return finalstr;
     }
     
-    public void addConn(String param, String conn) {
-        connections.put(param, conn);
-        //System.out.println("Added solution " + param + ", " + conn + " to object " + this.name);
+    public String addConn(String port, String conn) {
+        if (connections.get(port) != null) {
+            return "That port is already connected to something.";
+        } else {
+            connections.put(port, conn);
+            return "Added solution " + port + ", " + conn + " to object " + this.name;
+        }
+    }
+    
+    public String removeConn(String port) {
+        if (connections.get(port) != null) {
+            connections.remove(port);
+            return "Solution removed for " + this.name + "." + port;
+        } else {
+            return "Can't remove connection that doesn't exist.";
+        }
     }
 }

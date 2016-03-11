@@ -195,31 +195,44 @@ public class MainWindow1 extends javax.swing.JFrame {
     public void createNetItem(String type, String name) {
         NetworkItem item = new NetworkItem(type, name);
         itemsMap.put(name, item);
-        publishItem(item);
+        publishItem(item, type);
     }
     
-    public void publishItem(NetworkItem item) {
+    public void publishItem(NetworkItem item, String type) {
         mainPanel.setLayout(new FlowLayout(1, 1, 1));
         JButton button = new JButton(item.name);
         buttonsMap.put(item.name, button);
         NetworkItem net = itemsMap.get(item.name);
         MainWindow1 main = this;
-        button.addActionListener(new ActionListener(){
-          @Override
-          public void actionPerformed(ActionEvent e){
-            //System.out.println(net.name);
-            EditWindow editor = new EditWindow(main);
-            editor.changeName(net.name); editor.changeOs(net.os); 
-            editor.changeVer(net.ver); editor.changeSrc(net.src); 
-            editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
-            editor.changeEth2(net.eth2); editor.changeInf(net.inf);
-            editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
-            editor.setNetItem(net);
-            editor.setVisible(true);
-          }
-        });
-        if (item.type.equals("vm")) { button.setIcon(vmIcon); }
-        else if (item.type.equals("hub")) { button.setIcon(hubIcon); }
+        if (type.equals("vm")) {
+            button.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                  //System.out.println(net.name);
+                  EditWindow editor = new EditWindow(main);
+                  editor.changeName(net.name); editor.changeOs(net.os); 
+                  editor.changeVer(net.ver); editor.changeSrc(net.src); 
+                  editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
+                  editor.changeEth2(net.eth2);
+                  editor.setNetItem(net);
+                  editor.setVisible(true);
+                }
+            }); 
+            button.setIcon(vmIcon);
+        } else if (item.type.equals("hub")) { 
+            button.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                  //System.out.println(net.name);
+                  EditWindowHub editor = new EditWindowHub(main);
+                  editor.changeName(net.name); editor.changeInf(net.inf); 
+                  editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
+                  editor.setNetItem(net);
+                  editor.setVisible(true);
+                }
+            });
+            button.setIcon(hubIcon); 
+        }
         mainPanel.add(button);
         mainPanel.revalidate();
         validate();
@@ -227,6 +240,10 @@ public class MainWindow1 extends javax.swing.JFrame {
     
     public void setConsole(String text) {
         consoleLbl.setText(text);
+    }
+    
+    public HashMap<String, NetworkItem> getNetItems() {
+        return itemsMap;
     }
     
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed

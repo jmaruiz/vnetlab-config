@@ -6,6 +6,8 @@
 package configurator;
 
 import java.util.HashMap;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,12 +48,9 @@ public class EditWindow extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         srcField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        infField = new javax.swing.JTextField();
-        subnetField = new javax.swing.JTextField();
-        maskField = new javax.swing.JTextField();
+        eth0Con = new javax.swing.JButton();
+        eth1Con = new javax.swing.JButton();
+        eth2Con = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,11 +86,26 @@ public class EditWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Src:");
 
-        jLabel8.setText("Inf:");
+        eth0Con.setText("Connect");
+        eth0Con.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eth0ConActionPerformed(evt);
+            }
+        });
 
-        jLabel9.setText("Subnet:");
+        eth1Con.setText("Connect");
+        eth1Con.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eth1ConActionPerformed(evt);
+            }
+        });
 
-        jLabel10.setText("Mask:");
+        eth2Con.setText("Connect");
+        eth2Con.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eth2ConActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +115,7 @@ public class EditWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 163, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton))
@@ -113,22 +127,25 @@ public class EditWindow extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(verField)
                             .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(osField)
-                            .addComponent(eth0Field)
-                            .addComponent(eth1Field)
-                            .addComponent(eth2Field)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(eth1Field)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eth1Con))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(eth2Field)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(eth2Con))
                             .addComponent(srcField)
-                            .addComponent(infField)
-                            .addComponent(subnetField)
-                            .addComponent(maskField))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(eth0Field, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(eth0Con)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,31 +167,22 @@ public class EditWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(srcField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(eth0Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eth0Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eth0Con))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(eth1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eth1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eth1Con))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(eth2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(infField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(subnetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(maskField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                    .addComponent(eth2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eth2Con))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
                     .addComponent(cancelButton))
@@ -188,14 +196,25 @@ public class EditWindow extends javax.swing.JFrame {
     MainWindow1 mainWindow = null;
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
+        mainWindow.setConsole("");
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
         setNetItemProps();
     }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void eth0ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth0ConActionPerformed
+        connect(netItem, "eth0");
+    }//GEN-LAST:event_eth0ConActionPerformed
+
+    private void eth1ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth1ConActionPerformed
+        connect(netItem, "eth1");
+    }//GEN-LAST:event_eth1ConActionPerformed
+
+    private void eth2ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth2ConActionPerformed
+        connect(netItem, "eth2");
+    }//GEN-LAST:event_eth2ConActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,15 +276,6 @@ public class EditWindow extends javax.swing.JFrame {
     public void changeEth2(String newText) {
         eth2Field.setText(newText);
     }
-    public void changeInf(String newText) {
-        infField.setText(newText);
-    }
-    public void changeSubnet(String newText) {
-        subnetField.setText(newText);
-    }
-    public void changeMask(String newText) {
-        maskField.setText(newText);
-    }
     
     public void setNetItemProps() {
         netItem.ver = this.verField.getText();
@@ -275,36 +285,51 @@ public class EditWindow extends javax.swing.JFrame {
         netItem.eth1 = this.eth1Field.getText();
         netItem.eth2 = this.eth2Field.getText();
         
-        netItem.inf = this.infField.getText();
-        netItem.subnet = this.subnetField.getText();
-        netItem.netmask = this.maskField.getText();
-        
         mainWindow.setConsole(netItem.name + " has been updated.");
         this.dispose();
+    }
+    
+    public void connect(NetworkItem item, String port) {
+        HashMap itemSet = mainWindow.getNetItems();
+        JFrame frame = new JFrame("Connect a port to a hub.");
+        String name = JOptionPane.showInputDialog(frame, "Enter the name of the hub you want to connect to:");
+        if (name != null && !name.equals("")){
+            name = name.replaceAll("\\s+","");
+            NetworkItem hub = (NetworkItem) itemSet.get(name);
+            if (hub.type.equals("hub")) {
+                String add = item.addConn(port, "v2." + hub.internal);
+                mainWindow.setConsole(add);
+                this.dispose();
+            } else {
+                mainWindow.setConsole("ERROR: hub with the name " + name + " does not exist.");
+                this.dispose();
+            }
+        } else if (name != null && name.equals("")) {
+            String remove = item.removeConn(port);
+            mainWindow.setConsole(remove);
+            this.dispose();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JButton eth0Con;
     private javax.swing.JTextField eth0Field;
+    private javax.swing.JButton eth1Con;
     private javax.swing.JTextField eth1Field;
+    private javax.swing.JButton eth2Con;
     private javax.swing.JTextField eth2Field;
-    private javax.swing.JTextField infField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField maskField;
     private javax.swing.JLabel nameField;
     private javax.swing.JTextField osField;
     private javax.swing.JTextField srcField;
-    private javax.swing.JTextField subnetField;
     private javax.swing.JTextField verField;
     // End of variables declaration//GEN-END:variables
 }
