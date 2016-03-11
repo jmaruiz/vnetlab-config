@@ -51,6 +51,7 @@ public class EditWindow extends javax.swing.JFrame {
         eth0Con = new javax.swing.JButton();
         eth1Con = new javax.swing.JButton();
         eth2Con = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +108,13 @@ public class EditWindow extends javax.swing.JFrame {
             }
         });
 
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +123,8 @@ public class EditWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(delete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton))
@@ -185,7 +194,8 @@ public class EditWindow extends javax.swing.JFrame {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(delete))
                 .addContainerGap())
         );
 
@@ -215,6 +225,16 @@ public class EditWindow extends javax.swing.JFrame {
     private void eth2ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth2ConActionPerformed
         connect(netItem, "eth2");
     }//GEN-LAST:event_eth2ConActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        JFrame frame = new JFrame("Confirm Delete");
+        Integer deleted = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Confirm delete.", JOptionPane.YES_NO_OPTION);
+        if (deleted == 0){
+            if (mainWindow.deleteItem(netItem.name)){
+                this.dispose();
+            } else { System.out.println("Netitem not detected, can't delete."); }
+        }
+    }//GEN-LAST:event_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +334,7 @@ public class EditWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JButton delete;
     private javax.swing.JButton eth0Con;
     private javax.swing.JTextField eth0Field;
     private javax.swing.JButton eth1Con;

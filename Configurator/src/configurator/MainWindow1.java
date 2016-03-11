@@ -43,7 +43,6 @@ public class MainWindow1 extends javax.swing.JFrame {
         consoleLbl = new javax.swing.JLabel();
         scroller = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
-        deleteButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -88,13 +87,6 @@ public class MainWindow1 extends javax.swing.JFrame {
         );
 
         scroller.setViewportView(mainPanel);
-
-        deleteButton.setText("Delete Item");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -161,8 +153,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                         .addComponent(newVm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newHub)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,8 +162,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVm)
-                    .addComponent(newHub)
-                    .addComponent(deleteButton))
+                    .addComponent(newHub))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scroller, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,16 +185,16 @@ public class MainWindow1 extends javax.swing.JFrame {
     public void createNetItem(String type, String name) {
         NetworkItem item = new NetworkItem(type, name);
         itemsMap.put(name, item);
-        publishItem(item, type);
+        publishItem(item);
     }
     
-    public void publishItem(NetworkItem item, String type) {
+    public void publishItem(NetworkItem item) {
         mainPanel.setLayout(new FlowLayout(1, 1, 1));
         JButton button = new JButton(item.name);
         buttonsMap.put(item.name, button);
         NetworkItem net = itemsMap.get(item.name);
         MainWindow1 main = this;
-        if (type.equals("vm")) {
+        if (item.type.equals("vm")) {
             button.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
@@ -236,6 +226,20 @@ public class MainWindow1 extends javax.swing.JFrame {
         mainPanel.add(button);
         mainPanel.revalidate();
         validate();
+    }
+    
+    public boolean deleteItem (String name) {
+        if (itemsMap.get(name) != null) {
+            mainPanel.remove(buttonsMap.get(name));
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            itemsMap.remove(name);
+            this.setConsole(name + " has been removed successfully.");
+            return true;
+        } else {
+            this.setConsole("That network item doesn't exist!");
+            return false;
+        }
     }
     
     public void setConsole(String text) {
@@ -332,24 +336,6 @@ public class MainWindow1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        JFrame frame = new JFrame("Delete an item");
-        String name = JOptionPane.showInputDialog(frame, "Enter the name of the network item you want to delete:");
-        consoleLbl.setText("");
-        if (name != null && !name.equals("")){
-            name = name.replaceAll("\\s+","");
-            if (itemsMap.get(name) != null) {
-                mainPanel.remove(buttonsMap.get(name));
-                mainPanel.revalidate();
-                mainPanel.repaint();
-                itemsMap.remove(name);
-                consoleLbl.setText(name + " has been successfully removed");
-            } else {
-                consoleLbl.setText("ERROR - network item with that name does not exist!");
-            }
-        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -388,7 +374,6 @@ public class MainWindow1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JLabel consoleLbl;
-    private javax.swing.JButton deleteButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
