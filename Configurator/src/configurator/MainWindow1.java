@@ -177,63 +177,95 @@ public class MainWindow1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    HashMap<String, NetworkItem> itemsMap = new HashMap<>();
+    HashMap<String, VM> vmMap = new HashMap<>();
+    HashMap<String, Hub> hubMap = new HashMap<>();
     HashMap<String, JButton> buttonsMap = new HashMap<>();
     ImageIcon vmIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/vm.jpg"));
     ImageIcon hubIcon = new javax.swing.ImageIcon(getClass().getResource("/configurator/images/hub.jpg"));
     
     public void createNetItem(String type, String name) {
-        NetworkItem item = new NetworkItem(type, name);
-        itemsMap.put(name, item);
-        publishItem(item);
+        switch (type) {
+            case "vm":
+                {
+                    VM item = new VM(name);
+                    vmMap.put(name, item);
+                    publishItem(item);
+                    break;
+                }
+            case "hub":
+                {
+                    Hub item = new Hub(name);
+                    hubMap.put(name, item);
+                    publishItem(item);
+                    break;
+                }
+            default:
+                System.out.println("Invalid item type. Should be vm or hub.");
+                break;
+        }
     }
     
-    public void publishItem(NetworkItem item) {
+    public void publishItem(VM item) {
         mainPanel.setLayout(new FlowLayout(1, 1, 1));
         JButton button = new JButton(item.name);
         buttonsMap.put(item.name, button);
-        NetworkItem net = itemsMap.get(item.name);
+        VM net = vmMap.get(item.name);
         MainWindow1 main = this;
-        if (item.type.equals("vm")) {
-            button.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e){
-                  //System.out.println(net.name);
-                  EditWindow editor = new EditWindow(main);
-                  editor.changeName(net.name); editor.changeOs(net.os); 
-                  editor.changeVer(net.ver); editor.changeSrc(net.src); 
-                  editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
-                  editor.changeEth2(net.eth2);
-                  editor.setNetItem(net);
-                  editor.setVisible(true);
-                }
-            }); 
-            button.setIcon(vmIcon);
-        } else if (item.type.equals("hub")) { 
-            button.addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e){
-                  //System.out.println(net.name);
-                  EditWindowHub editor = new EditWindowHub(main);
-                  editor.changeName(net.name); editor.changeInf(net.inf); 
-                  editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
-                  editor.setNetItem(net);
-                  editor.setVisible(true);
-                }
-            });
-            button.setIcon(hubIcon); 
-        }
+        button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+              //System.out.println(net.name);
+              EditWindow editor = new EditWindow(main);
+              editor.changeName(net.name); editor.changeOs(net.os); 
+              editor.changeVer(net.ver); editor.changeSrc(net.src); 
+              editor.changeEth0(net.eth0); editor.changeEth1(net.eth1);
+              editor.changeEth2(net.eth2);
+              editor.setNetItem(net);
+              editor.setVisible(true);
+            }
+        }); 
+        button.setIcon(vmIcon);
+        mainPanel.add(button);
+        mainPanel.revalidate();
+        validate();
+    }
+    
+    public void publishItem(Hub item) {
+        mainPanel.setLayout(new FlowLayout(1, 1, 1));
+        JButton button = new JButton(item.name);
+        buttonsMap.put(item.name, button);
+        Hub net = hubMap.get(item.name);
+        MainWindow1 main = this;
+        button.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+              //System.out.println(net.name);
+              EditWindowHub editor = new EditWindowHub(main);
+              editor.changeName(net.name); editor.changeInf(net.inf); 
+              editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
+              editor.setNetItem(net);
+              editor.setVisible(true);
+            }
+        });
+        button.setIcon(hubIcon);
         mainPanel.add(button);
         mainPanel.revalidate();
         validate();
     }
     
     public boolean deleteItem (String name) {
-        if (itemsMap.get(name) != null) {
+        if (vmMap.get(name) != null) {
             mainPanel.remove(buttonsMap.get(name));
             mainPanel.revalidate();
             mainPanel.repaint();
-            itemsMap.remove(name);
+            vmMap.remove(name);
+            this.setConsole(name + " has been removed successfully.");
+            return true;
+        } else if (hubMap.get(name) != null) {
+            mainPanel.remove(buttonsMap.get(name));
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            hubMap.remove(name);
             this.setConsole(name + " has been removed successfully.");
             return true;
         } else {
@@ -246,8 +278,12 @@ public class MainWindow1 extends javax.swing.JFrame {
         consoleLbl.setText(text);
     }
     
-    public HashMap<String, NetworkItem> getNetItems() {
-        return itemsMap;
+    public HashMap<String, VM> getVmItems() {
+        return vmMap;
+    }
+    
+    public HashMap<String, Hub> getHubItems() {
+        return hubMap;
     }
     
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -261,8 +297,15 @@ public class MainWindow1 extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             try {
               // What to do with the file, e.g. display it in a TextArea
-              itemsMap = Parser.parse(new FileReader( file.getAbsolutePath() ));
-              for (NetworkItem item : itemsMap.values()) {
+              Parser parser = new Parser(new FileReader(file.getAbsolutePath()));
+              
+              vmMap = parser.getVmMap();
+              hubMap = parser.getHubMap();
+              
+              for (VM item : vmMap.values()) {
+                  publishItem(item);
+              }
+              for (Hub item : hubMap.values()) {
                   publishItem(item);
               }
             } catch (IOException ex) {
@@ -279,7 +322,7 @@ public class MainWindow1 extends javax.swing.JFrame {
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
             name = name.replaceAll("\\s+","");
-            if (itemsMap.get(name) != null) {
+            if (vmMap.get(name) != null) {
                 consoleLbl.setText("ERROR - network item with that name already exists!");
             } else {
                 createNetItem("vm", name);
@@ -293,7 +336,7 @@ public class MainWindow1 extends javax.swing.JFrame {
         consoleLbl.setText("");
         if (name != null && !name.equals("")){
             name = name.replaceAll("\\s+","");
-            if (itemsMap.get(name) != null) {
+            if (hubMap.get(name) != null) {
                 consoleLbl.setText("ERROR - network item with that name already exists!");
             } else {
                 createNetItem("hub", name);
@@ -319,8 +362,11 @@ public class MainWindow1 extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             
-            for (NetworkItem item : itemsMap.values()) {
-                //item.os = "Linux"; item.ver = "7.5"; item.src = "/srv/VMLibrary/JeOS"; // test purposes to add variables
+            for (VM item : vmMap.values()) {
+                finalstr += item.generateString();
+            }
+            
+            for (Hub item : hubMap.values()) {
                 finalstr += item.generateString();
             }
             

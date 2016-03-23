@@ -5,26 +5,20 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public static void main(String [] args){
-        FileReader fileReader;
-        try {
-            fileReader = new FileReader("network1.cfg");
-            Parser.parse(fileReader);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Issue opening file, " + ex.getMessage());
-        }
-    }
+    String line, param, value, curType, curName;
+    String[] lineRead;
+    HashMap<String, VM> vmMap = new HashMap<>();
+    HashMap<String, Hub> hubMap = new HashMap<>();
+    HashMap<String, String> solutionMap = new HashMap<>();
+    VM curVmItem = new VM("");
+    Hub curHubItem = new Hub("");
+    Boolean findObjects = true;
+    Boolean findSolutions = false;
+    Boolean parseVM = false;
+    Boolean parseHub = false;
     
-    public static HashMap<String, NetworkItem> parse(FileReader file) {
-        // This will reference one line at a time
-        String line, param, value, curType, curName;
-        String[] lineRead;
-        HashMap<String, NetworkItem> itemsMap = new HashMap<>();
-        HashMap<String, String> solutionMap = new HashMap<>();
-        NetworkItem curMapItem = new NetworkItem("null", "null");
-        Boolean findObjects = true;
-        Boolean findSolutions = false;
-
+    public Parser(FileReader file){
+        
         try {
             BufferedReader bufferedReader = new BufferedReader(file);
 
@@ -36,10 +30,21 @@ public class Parser {
                         if (lineRead[2].contains("{")) {
                             curType = lineRead[0];
                             curName = lineRead[1];
-                            NetworkItem item = new NetworkItem(curType, curName);
-                            itemsMap.put(curName, item);
-                            curMapItem = itemsMap.get(curName);
-                            findObjects = false;
+                            if (curType.equals("vm")) {
+                                VM item = new VM(curName);
+                                vmMap.put(curName, item);
+                                curVmItem = vmMap.get(curName);
+                                parseVM = true;
+                                findObjects = false; parseHub = false;
+                            } else if (curType.equals("hub")) {
+                                Hub item = new Hub(curName);
+                                hubMap.put(curName, item);
+                                curHubItem = hubMap.get(curName);
+                                parseHub = true;
+                                findObjects = false; parseVM = false;
+                            } else {
+                                System.out.println("Incorrect item type. Should be hub or vm.");
+                            }
                         } else {
                             System.out.println("Invalid object opening statement.");
                         }
@@ -62,10 +67,10 @@ public class Parser {
                         solutionMap.put(param, value); //puts into map (Gemini.eth0 , v2.vinf21)
                         
                         String[] paramSplit = param.split(Pattern.quote(".")); //split Gemini.eth0 into [Gemini, eth0]
-                        curMapItem = itemsMap.get(paramSplit[0]); //gets item based on name above
-                        curMapItem.addConn(paramSplit[1], value);
+                        curVmItem = vmMap.get(paramSplit[0]); //gets item based on name above
+                        curVmItem.addConn(paramSplit[1], value);
                     }
-                } else {
+                } else if (parseVM) {
                     lineRead = line.trim().split(":");
                     if (lineRead.length == 2) {
                         param = lineRead[0].trim();
@@ -73,31 +78,22 @@ public class Parser {
                         try {
                             switch(param) {
                                 case "os":
-                                    curMapItem.os = value;
+                                    curVmItem.setOs(value);
                                     break;
                                 case "ver":
-                                    curMapItem.ver = value;
+                                    curVmItem.setVer(value);
                                     break;
                                 case "src":
-                                    curMapItem.src = value;
+                                    curVmItem.setSrc(value);
                                     break;
                                 case "eth0":
-                                    curMapItem.eth0 = value;
+                                    curVmItem.setEth0(value);
                                     break;
                                 case "eth1":
-                                    curMapItem.eth1 = value;
+                                    curVmItem.setEth1(value);
                                     break;
                                 case "eth2":
-                                    curMapItem.eth2 = value;
-                                    break;
-                                case "inf":
-                                    curMapItem.inf = value;
-                                    break;
-                                case "subnet":
-                                    curMapItem.subnet = value;
-                                    break;
-                                case "netmask":
-                                    curMapItem.netmask = value;
+                                    curVmItem.setEth2(value);
                                     break;
                                 default:
                                     System.out.println("Unknown Parameter Error.");
@@ -108,20 +104,55 @@ public class Parser {
                    } else if (lineRead.length == 1 && lineRead[0].contains("}")) {
                        findObjects = true;
                    }
+                } else if (parseHub) {
+                    lineRead = line.trim().split(":");
+                    if (lineRead.length == 2) {
+                        param = lineRead[0].trim();
+                        value = lineRead[1].trim().replace("\"", "");
+                        try {
+                            switch(param) {
+                                case "inf":
+                                    curHubItem.setInf(value);
+                                    break;
+                                case "subnet":
+                                    curHubItem.setSubnet(value);
+                                    break;
+                                case "netmask":
+                                    curHubItem.setNetmask(value);
+                                    break;
+                                default:
+                                    System.out.println("Unknown Parameter Error.");
+                            }
+                        } catch(NullPointerException e) {
+                            System.out.println("The object you're trying to access doesn't exist.");
+                            System.out.println(e.getMessage());
+                        }
+                   } else if (lineRead.length == 1 && lineRead[0].contains("}")) {
+                       findObjects = true;
+                   }
                 }
             }   
             
             // Always close files.
             bufferedReader.close();
-            printMap(itemsMap);
+            printMap(vmMap);
+            printMap(hubMap);
             printMap(solutionMap);
-            return itemsMap;
+            //return itemsMap; leftover from old method
         }
         catch(IOException ex) {
             System.out.println(ex.getMessage());
-            return null;
+            //return null; leftover from old method
         }
     } 
+    
+    public HashMap<String, VM> getVmMap() {
+        return vmMap;
+    }
+    
+    public HashMap<String, Hub> getHubMap() {
+        return hubMap;
+    }
     
     public static void printMap(Map map) {
         for (Object name : map.keySet()) {

@@ -1,15 +1,26 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package configurator;
 
 import java.util.HashMap;
 
-public class NetworkItem {
-    public String type, name, os, ver, src, eth0, eth1, eth2; //VM attributes
-    public String inf, subnet, netmask, internal; //Hub attributes
-    public static int hubNum = 21;
+/**
+ *
+ * @author joser
+ */
+public class VM {
+    
+    public String type, name, os, ver, src, eth0, eth1, eth2;
     public HashMap<String, String> connections = new HashMap<>();
     
-   
+    VM (String n) {
+        this.type = "vm";
+        this.name = n;
+        System.out.println("New object created: " + this.type + " - " + this.name);
+    }
     
     public String generateString() {
         String finalstr;
@@ -20,9 +31,6 @@ public class NetworkItem {
         if (this.eth0 != null && !this.eth0.equals("")) { finalstr += "\teth0 : \"" + this.eth0 + "\" \n"; }
         if (this.eth1 != null && !this.eth1.equals("")) { finalstr += "\teth1 : \"" + this.eth1 + "\" \n"; }
         if (this.eth2 != null && !this.eth2.equals("")) { finalstr += "\teth2 : \"" + this.eth2 + "\" \n"; }
-        if (this.inf != null && !this.inf.equals("")) { finalstr += "\tinf : " + this.inf + " \n"; }
-        if (this.subnet != null && !this.subnet.equals("")) { finalstr += "\tsubnet : \"" + this.subnet + "\" \n"; }
-        if (this.netmask != null && !this.netmask.equals("")) { finalstr += "\tnetmask : \"" + this.netmask + "\" \n"; }
         finalstr += "}\n";
         
         return finalstr;
@@ -44,5 +52,59 @@ public class NetworkItem {
         } else {
             return "Can't remove connection that doesn't exist.";
         }
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getVer() {
+        return ver;
+    }
+
+    public void setVer(String ver) {
+        this.ver = ver;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
+    }
+    
+    public String getEth0() {
+        return eth0;
+    }
+
+    public void setEth0(String eth0) {
+        this.eth0 = eth0;
+    }
+    public String getEth1() {
+        return eth1;
+    }
+
+    public void setEth1(String eth1) {
+        this.eth2 = eth1;
+    }
+    public String getEth2() {
+        return eth2;
+    }
+
+    public void setEth2(String eth2) {
+        this.eth2 = eth2;
     }
 }

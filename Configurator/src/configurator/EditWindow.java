@@ -202,7 +202,7 @@ public class EditWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
    
-    NetworkItem netItem = null;
+    VM netItem = null;
     MainWindow1 mainWindow = null;
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -271,7 +271,7 @@ public class EditWindow extends javax.swing.JFrame {
         });
     }
     
-    public void setNetItem(NetworkItem net) {
+    public void setNetItem(VM net) {
         netItem = net;
     }
     
@@ -309,8 +309,8 @@ public class EditWindow extends javax.swing.JFrame {
         this.dispose();
     }
     
-    public void connect(NetworkItem item, String port) {
-        HashMap itemSet = mainWindow.getNetItems();
+    public void connect(VM item, String port) {
+        HashMap itemSet = mainWindow.getVmItems();
         JFrame frame = new JFrame("Connect a port to a hub.");
         String name = JOptionPane.showInputDialog(frame, "Enter the name of the hub you want to connect to:");
         if (name != null && !name.equals("")){

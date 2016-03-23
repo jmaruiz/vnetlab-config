@@ -5,7 +5,6 @@
  */
 package configurator;
 
-import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,6 +16,7 @@ public class EditWindowHub extends javax.swing.JFrame {
 
     /**
      * Creates new form EditWindow
+     * @param main
      */
     public EditWindowHub(MainWindow1 main) {
         initComponents();
@@ -134,7 +134,7 @@ public class EditWindowHub extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
    
-    NetworkItem netItem = null;
+    Hub netItem = null;
     MainWindow1 mainWindow = null;
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -192,7 +192,7 @@ public class EditWindowHub extends javax.swing.JFrame {
         });
     }
     
-    public void setNetItem(NetworkItem net) {
+    public void setNetItem(Hub net) {
         netItem = net;
     }
     
@@ -210,9 +210,9 @@ public class EditWindowHub extends javax.swing.JFrame {
     }
     
     public void setNetItemProps() {        
-        netItem.inf = this.infField.getText();
-        netItem.subnet = this.subnetField.getText();
-        netItem.netmask = this.maskField.getText();
+        netItem.setInf(this.infField.getText());
+        netItem.setSubnet(this.subnetField.getText());
+        netItem.setNetmask(this.maskField.getText());
         
         mainWindow.setConsole(netItem.name + " has been updated.");
         this.dispose();
