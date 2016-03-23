@@ -31,7 +31,7 @@ public class Hub {
         if (this.inf != null && !this.inf.equals("")) { finalstr += "\tinf : " + this.inf + " \n"; }
         if (this.subnet != null && !this.subnet.equals("")) { finalstr += "\tsubnet : \"" + this.subnet + "\" \n"; }
         if (this.netmask != null && !this.netmask.equals("")) { finalstr += "\tnetmask : \"" + this.netmask + "\" \n"; }
-        finalstr += "}\n";
+        finalstr += "}\n\n";
         
         return finalstr;
     }

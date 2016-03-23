@@ -367,10 +367,18 @@ public class MainWindow1 extends javax.swing.JFrame {
             for (VM item : vmMap.values()) {
                 finalstr += item.generateString();
             }
-            
             for (Hub item : hubMap.values()) {
                 finalstr += item.generateString();
             }
+            finalstr += "partial_solution {\n";
+            for (VM item : vmMap.values()) {
+                finalstr += item.getSolutionString();
+            }
+            if (finalstr != null && finalstr.length() > 0 && finalstr.charAt(finalstr.length()-2)==',') {
+                finalstr = finalstr.substring(0, finalstr.length()-2);
+            }
+            finalstr += "\n}\n";
+            
             
             try {
                 configurator.Writer.writeCfg(finalstr, new File(file.getAbsolutePath() ));

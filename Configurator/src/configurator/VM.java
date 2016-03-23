@@ -31,8 +31,16 @@ public class VM {
         if (this.eth0 != null && !this.eth0.equals("")) { finalstr += "\teth0 : \"" + this.eth0 + "\" \n"; }
         if (this.eth1 != null && !this.eth1.equals("")) { finalstr += "\teth1 : \"" + this.eth1 + "\" \n"; }
         if (this.eth2 != null && !this.eth2.equals("")) { finalstr += "\teth2 : \"" + this.eth2 + "\" \n"; }
-        finalstr += "}\n";
+        finalstr += "}\n\n";
         
+        return finalstr;
+    }
+    
+    public String getSolutionString() {
+        String finalstr = "";
+        for (String port : connections.keySet()) {
+            finalstr += "(" + this.name + "." + port + " " + connections.get(port) + "),\n";
+        }
         return finalstr;
     }
     

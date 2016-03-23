@@ -298,24 +298,24 @@ public class EditWindow extends javax.swing.JFrame {
     }
     
     public void setNetItemProps() {
-        netItem.ver = this.verField.getText();
-        netItem.src = this.srcField.getText();
-        netItem.os = this.osField.getText();
-        netItem.eth0 = this.eth0Field.getText();
-        netItem.eth1 = this.eth1Field.getText();
-        netItem.eth2 = this.eth2Field.getText();
+        netItem.setVer(this.verField.getText());
+        netItem.setSrc(this.srcField.getText());
+        netItem.setOs(this.osField.getText());
+        netItem.setEth0(this.eth0Field.getText());
+        netItem.setEth1(this.eth1Field.getText());
+        netItem.setEth2(this.eth2Field.getText());
         
         mainWindow.setConsole(netItem.name + " has been updated.");
         this.dispose();
     }
     
     public void connect(VM item, String port) {
-        HashMap itemSet = mainWindow.getVmItems();
+        HashMap itemSet = mainWindow.getHubItems();
         JFrame frame = new JFrame("Connect a port to a hub.");
         String name = JOptionPane.showInputDialog(frame, "Enter the name of the hub you want to connect to:");
         if (name != null && !name.equals("")){
             name = name.replaceAll("\\s+","");
-            NetworkItem hub = (NetworkItem) itemSet.get(name);
+            Hub hub = (Hub) itemSet.get(name);
             if (hub.type.equals("hub")) {
                 String add = item.addConn(port, "v2." + hub.internal);
                 mainWindow.setConsole(add);
