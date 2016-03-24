@@ -321,8 +321,8 @@ public class EditWindow extends javax.swing.JFrame {
         String name = JOptionPane.showInputDialog(frame, frametext);
         if (name != null && !name.equals("")){
             name = name.replaceAll("\\s+","");
-            Hub hub = itemSet.get(name);
-            if (hub.type.equals("hub")) {
+            if (itemSet.get(name) != null) {
+                Hub hub = itemSet.get(name);
                 String add = item.addConn(port, "v2." + hub.getInternal());
                 hub.addInf(item.getName() + "." + port);
                 mainWindow.setConsole(add);
