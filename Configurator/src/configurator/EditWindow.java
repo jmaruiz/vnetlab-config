@@ -310,14 +310,21 @@ public class EditWindow extends javax.swing.JFrame {
     }
     
     public void connect(VM item, String port) {
-        HashMap itemSet = mainWindow.getHubItems();
+        HashMap<String, Hub> itemSet = mainWindow.getHubItems();
         JFrame frame = new JFrame("Connect a port to a hub.");
-        String name = JOptionPane.showInputDialog(frame, "Enter the name of the hub you want to connect to:");
+        String frametext = "Enter the name of the hub you want to connect ";
+               frametext += item.getName() + "." + port + " to:\n";
+        for (String key : itemSet.keySet()) {
+            Hub hub = itemSet.get(key);
+            frametext += "\n" + hub.getName();
+        }
+        String name = JOptionPane.showInputDialog(frame, frametext);
         if (name != null && !name.equals("")){
             name = name.replaceAll("\\s+","");
-            Hub hub = (Hub) itemSet.get(name);
+            Hub hub = itemSet.get(name);
             if (hub.type.equals("hub")) {
-                String add = item.addConn(port, "v2." + hub.internal);
+                String add = item.addConn(port, "v2." + hub.getInternal());
+                hub.addInf(item.getName() + "." + port);
                 mainWindow.setConsole(add);
                 this.dispose();
             } else {
@@ -326,6 +333,9 @@ public class EditWindow extends javax.swing.JFrame {
             }
         } else if (name != null && name.equals("")) {
             String remove = item.removeConn(port);
+            for (Hub hub : itemSet.values()) {
+                hub.removeInf(item.getName() + "." + port);
+            }
             mainWindow.setConsole(remove);
             this.dispose();
         }

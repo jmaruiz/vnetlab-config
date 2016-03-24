@@ -70,6 +70,8 @@ public class EditWindowHub extends javax.swing.JFrame {
 
         jLabel10.setText("Mask:");
 
+        infField.setEditable(false);
+
         delete.setText("Delete");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

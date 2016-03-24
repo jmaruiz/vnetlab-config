@@ -257,6 +257,9 @@ public class MainWindow1 extends javax.swing.JFrame {
     
     public boolean deleteItem (String name) {
         if (vmMap.get(name) != null) {
+            for (Hub hub : hubMap.values()) {
+                hub.removeVM(name);
+            }
             mainPanel.remove(buttonsMap.get(name));
             mainPanel.revalidate();
             mainPanel.repaint();
@@ -264,6 +267,9 @@ public class MainWindow1 extends javax.swing.JFrame {
             this.setConsole(name + " has been removed successfully.");
             return true;
         } else if (hubMap.get(name) != null) {
+            for (VM vm : vmMap.values()) {
+                vm.removeHub(hubMap.get(name).getInternal());
+            }
             mainPanel.remove(buttonsMap.get(name));
             mainPanel.revalidate();
             mainPanel.repaint();
@@ -374,7 +380,7 @@ public class MainWindow1 extends javax.swing.JFrame {
             for (VM item : vmMap.values()) {
                 finalstr += item.getSolutionString();
             }
-            if (finalstr != null && finalstr.length() > 0 && finalstr.charAt(finalstr.length()-2)==',') {
+            if (finalstr.charAt(finalstr.length()-2)==',') {
                 finalstr = finalstr.substring(0, finalstr.length()-2);
             }
             finalstr += "\n}\n";

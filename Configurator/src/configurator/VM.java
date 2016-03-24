@@ -62,6 +62,14 @@ public class VM {
         }
     }
     
+    public void removeHub (String hub) {
+        for (String port : connections.keySet()) {
+            if (connections.get(port).contains(hub)) {
+                connections.remove(port);
+            }
+        }
+    }
+    
     public String getName() {
         return name;
     }
