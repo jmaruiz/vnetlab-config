@@ -34,12 +34,12 @@ public class MainWindow1Test {
     @Test
     public void testCreateNetItem() {
         System.out.println("createNetItem");
-        String type = "";
-        String name = "";
+        String type = "vm";
+        String name = "test";
         MainWindow1 instance = new MainWindow1();
         instance.createNetItem(type, name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -48,11 +48,11 @@ public class MainWindow1Test {
     @Test
     public void testPublishItem_VM() {
         System.out.println("publishItem");
-        VM item = null;
+        VM item = new VM("test");
         MainWindow1 instance = new MainWindow1();
         instance.publishItem(item);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -61,11 +61,11 @@ public class MainWindow1Test {
     @Test
     public void testPublishItem_Hub() {
         System.out.println("publishItem");
-        Hub item = null;
+        Hub item = new Hub("test");
         MainWindow1 instance = new MainWindow1();
         instance.publishItem(item);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -74,13 +74,13 @@ public class MainWindow1Test {
     @Test
     public void testDeleteItem() {
         System.out.println("deleteItem");
-        String name = "";
+        String name = "test";
         MainWindow1 instance = new MainWindow1();
         boolean expResult = false;
         boolean result = instance.deleteItem(name);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -89,11 +89,11 @@ public class MainWindow1Test {
     @Test
     public void testSetConsole() {
         System.out.println("setConsole");
-        String text = "";
+        String text = "This is a test";
         MainWindow1 instance = new MainWindow1();
         instance.setConsole(text);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -103,11 +103,11 @@ public class MainWindow1Test {
     public void testGetVmItems() {
         System.out.println("getVmItems");
         MainWindow1 instance = new MainWindow1();
-        HashMap<String, VM> expResult = null;
+        HashMap<String, VM> expResult = new HashMap();
         HashMap<String, VM> result = instance.getVmItems();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -117,11 +117,11 @@ public class MainWindow1Test {
     public void testGetHubItems() {
         System.out.println("getHubItems");
         MainWindow1 instance = new MainWindow1();
-        HashMap<String, Hub> expResult = null;
+        HashMap<String, Hub> expResult = new HashMap();
         HashMap<String, Hub> result = instance.getHubItems();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -130,10 +130,10 @@ public class MainWindow1Test {
     @Test
     public void testMain() {
         System.out.println("main");
-        String[] args = null;
+        String[] args = {"test"};
         MainWindow1.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

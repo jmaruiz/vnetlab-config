@@ -33,10 +33,10 @@ public class EditWindowHubTest {
     @Test
     public void testMain() {
         System.out.println("main");
-        String[] args = null;
+        String[] args = {"test"};
         EditWindowHub.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -45,11 +45,11 @@ public class EditWindowHubTest {
     @Test
     public void testSetNetItem() {
         System.out.println("setNetItem");
-        Hub net = null;
-        EditWindowHub instance = null;
+        Hub net = new Hub("test");
+        MainWindow1 instance = new MainWindow1();
         instance.setNetItem(net);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -110,7 +110,7 @@ public class EditWindowHubTest {
     @Test
     public void testSetNetItemProps() {
         System.out.println("setNetItemProps");
-        EditWindowHub instance = null;
+        EditWindowHub instance = new EditWindowHub();
         instance.setNetItemProps();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
