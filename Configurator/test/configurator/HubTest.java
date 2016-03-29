@@ -33,12 +33,12 @@ public class HubTest {
     @Test
     public void testGenerateString() {
         System.out.println("generateString");
-        Hub instance = null;
-        String expResult = "";
+        Hub instance = new Hub("test");
+        String expResult = "test";
         String result = instance.generateString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -47,12 +47,12 @@ public class HubTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Hub instance = null;
-        String expResult = "";
+        Hub instance = new Hub("test");
+        String expResult = "test";
         String result = instance.getName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -61,11 +61,11 @@ public class HubTest {
     @Test
     public void testSetName() {
         System.out.println("setName");
-        String name = "";
-        Hub instance = null;
+        String name = "test";
+        Hub instance = new Hub("test");
         instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**

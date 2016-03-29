@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/EditWindowHub.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/NetworkItem.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/EditWindow.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/Parser.java</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/network1.cfg</file>
-            <file>file:/C:/Users/joser/Documents/GitHub/vnetlab-config/Configurator/src/configurator/MainWindow1.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/MainWindow1Test.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/VMTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/ParserTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/EditWindowTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/NetworkItemTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/WriterTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/ConfiguratorSuite.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/EditWindowHubTest.java</file>
         </group>
     </open-files>
 </project-private>

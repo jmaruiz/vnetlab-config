@@ -47,14 +47,14 @@ public class NetworkItemTest {
     @Test
     public void testAddConn() {
         System.out.println("addConn");
-        String port = "";
-        String conn = "";
+        String port = "23";
+        String conn = "4";
         NetworkItem instance = new NetworkItem();
-        String expResult = "";
+        String expResult = "23,4";
         String result = instance.addConn(port, conn);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
