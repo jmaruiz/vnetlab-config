@@ -36,7 +36,7 @@ public class EditWindowTest {
         String[] args = null;
         EditWindow.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -49,7 +49,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.setNetItem(net);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -58,11 +58,11 @@ public class EditWindowTest {
     @Test
     public void testChangeName() {
         System.out.println("changeName");
-        String newText = "";
-        EditWindow instance = null;
+        String newText = "test";
+        EditWindow instance = new EditWindow();
         instance.changeName(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -75,7 +75,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeOs(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,7 +88,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeVer(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -101,7 +101,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeSrc(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -114,7 +114,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeEth0(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -127,7 +127,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeEth1(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -140,7 +140,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.changeEth2(newText);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -152,7 +152,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.setNetItemProps();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -166,7 +166,7 @@ public class EditWindowTest {
         EditWindow instance = null;
         instance.connect(item, port);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

@@ -38,7 +38,7 @@ public class VMTest {
         String result = instance.generateString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -52,7 +52,7 @@ public class VMTest {
         String result = instance.getSolutionString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -68,7 +68,7 @@ public class VMTest {
         String result = instance.addConn(port, conn);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -83,7 +83,7 @@ public class VMTest {
         String result = instance.removeConn(port);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -96,7 +96,7 @@ public class VMTest {
         VM instance = null;
         instance.removeHub(hub);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -110,7 +110,7 @@ public class VMTest {
         String result = instance.getName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -123,7 +123,7 @@ public class VMTest {
         VM instance = null;
         instance.setName(name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -137,7 +137,7 @@ public class VMTest {
         String result = instance.getSrc();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -150,7 +150,7 @@ public class VMTest {
         VM instance = null;
         instance.setSrc(src);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -164,7 +164,7 @@ public class VMTest {
         String result = instance.getVer();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -177,7 +177,7 @@ public class VMTest {
         VM instance = null;
         instance.setVer(ver);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -191,7 +191,7 @@ public class VMTest {
         String result = instance.getOs();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -204,7 +204,7 @@ public class VMTest {
         VM instance = null;
         instance.setOs(os);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -218,7 +218,7 @@ public class VMTest {
         String result = instance.getEth0();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -231,7 +231,7 @@ public class VMTest {
         VM instance = null;
         instance.setEth0(eth0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -245,7 +245,7 @@ public class VMTest {
         String result = instance.getEth1();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -258,7 +258,7 @@ public class VMTest {
         VM instance = null;
         instance.setEth1(eth1);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -272,7 +272,7 @@ public class VMTest {
         String result = instance.getEth2();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -285,7 +285,7 @@ public class VMTest {
         VM instance = null;
         instance.setEth2(eth2);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

@@ -79,7 +79,7 @@ public class HubTest {
         String result = instance.getInf();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -92,7 +92,7 @@ public class HubTest {
         Hub instance = null;
         instance.setInf(inf);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -104,7 +104,7 @@ public class HubTest {
         Hub instance = null;
         instance.generateInf();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -117,7 +117,7 @@ public class HubTest {
         Hub instance = null;
         instance.addInf(string);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -130,7 +130,7 @@ public class HubTest {
         Hub instance = null;
         instance.removeInf(string);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -139,11 +139,11 @@ public class HubTest {
     @Test
     public void testRemoveVM() {
         System.out.println("removeVM");
-        String name = "";
-        Hub instance = null;
+        String name = "test";
+        Hub instance = new Hub("test");
         instance.removeVM(name);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -157,7 +157,7 @@ public class HubTest {
         String result = instance.getSubnet();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -170,7 +170,7 @@ public class HubTest {
         Hub instance = null;
         instance.setSubnet(subnet);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -184,7 +184,7 @@ public class HubTest {
         String result = instance.getNetmask();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -197,7 +197,7 @@ public class HubTest {
         Hub instance = null;
         instance.setNetmask(netmask);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -206,12 +206,12 @@ public class HubTest {
     @Test
     public void testGetInternal() {
         System.out.println("getInternal");
-        Hub instance = null;
-        String expResult = "";
+        Hub instance = new Hub("test");
+        String expResult = "test";
         String result = instance.getInternal();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }

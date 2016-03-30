@@ -37,7 +37,7 @@ public class WriterTest {
         String[] args = null;
         Writer.main(args);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -50,7 +50,7 @@ public class WriterTest {
         File file = null;
         Writer.writeCfg(input, file);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }
