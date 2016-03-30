@@ -28,20 +28,6 @@ public class NetworkItemTest {
     }
 
     /**
-     * Test of generateString method, of class NetworkItem.
-     */
-    @Test
-    public void testGenerateString() {
-        System.out.println("generateString");
-        NetworkItem instance = new NetworkItem();
-        String expResult = "test";
-        String result = instance.generateString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of addConn method, of class NetworkItem.
      */
     @Test
@@ -50,26 +36,20 @@ public class NetworkItemTest {
         String port = "23";
         String conn = "4";
         NetworkItem instance = new NetworkItem();
-        String expResult = "23,4";
+        String expResult = "Added solution 23, 4 to object null";
         String result = instance.addConn(port, conn);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeConn method, of class NetworkItem.
-     */
-    @Test
-    public void testRemoveConn() {
-        System.out.println("removeConn");
-        String port = "";
-        NetworkItem instance = new NetworkItem();
-        String expResult = "";
-        String result = instance.removeConn(port);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     
+    
+    @Test
+    public void testAddConn2() {
+        System.out.println("addConn");
+        String port = "4";
+        String conn = "6";
+        NetworkItem instance = new NetworkItem();
+        String expResult = "23,6";
+        String result = instance.addConn(port, conn);
+        assertEquals(expResult, result);
+    }
 }

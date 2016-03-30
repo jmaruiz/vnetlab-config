@@ -18,17 +18,22 @@ import org.junit.runners.Suite;
  * @author Edison
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({configurator.NetworkItemTest.class, configurator.images.ImagesSuite.class, configurator.configFilterTest.class, configurator.WriterTest.class, configurator.EditWindowTest.class, configurator.ParserTest.class, configurator.EditWindowHubTest.class, configurator.MainWindow1Test.class, configurator.VMTest.class, configurator.HubTest.class})
+@Suite.SuiteClasses({configurator.NetworkItemTest.class, configurator.images.ImagesSuite.class, configurator.configFilterTest.class, configurator.MainWindow1Test.class, configurator.VMTest.class, configurator.HubTest.class})
 public class ConfiguratorSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        System.out.println("The tests have started.");
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        System.out.println("The tests have finished.");
     }
-    
+ 
+    /**
+     * Test of createNetItem method, of class MainWindow1.
+     */
     @Test
     public void testCreateNetItem() {
         System.out.println("createNetItem");
@@ -36,36 +41,26 @@ public class ConfiguratorSuite {
         String name = "test";
         MainWindow1 instance = new MainWindow1();
         instance.createNetItem(type, name);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of publishItem method, of class MainWindow1.
-     */
     @Test
-    public void testPublishItem_VM() {
-        System.out.println("publishItem");
-        VM item = new VM("test");
+    public void testCreateNetItem2() {
+        System.out.println("createNetItem");
+        String type = "test";
+        String name = "test";
         MainWindow1 instance = new MainWindow1();
-        instance.publishItem(item);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        instance.createNetItem(type, name);
     }
-
-    /**
-     * Test of publishItem method, of class MainWindow1.
-     */
+    
     @Test
-    public void testPublishItem_Hub() {
-        System.out.println("publishItem");
-        Hub item = new Hub("test");
-        MainWindow1 instance = new MainWindow1();
-        instance.publishItem(item);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    public void testCreateNetItem3() {
+        System.out.println("createNetItem");
+        String type = "vm";
+        String name = "test";
+        MainWindow1 instance = null;
+        instance.createNetItem(type, name);
     }
-
+    
     /**
      * Test of deleteItem method, of class MainWindow1.
      */
@@ -77,60 +72,127 @@ public class ConfiguratorSuite {
         boolean expResult = false;
         boolean result = instance.deleteItem(name);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
-
+    
     /**
-     * Test of setConsole method, of class MainWindow1.
+     * Test of deleteItem method, of class MainWindow1.
      */
     @Test
-    public void testSetConsole() {
-        System.out.println("setConsole");
-        String text = "This is a test";
+    public void testDeleteItem2() {
+        System.out.println("deleteItem");
+        String name = "test";
         MainWindow1 instance = new MainWindow1();
-        instance.setConsole(text);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getVmItems method, of class MainWindow1.
-     */
-    @Test
-    public void testGetVmItems() {
-        System.out.println("getVmItems");
-        MainWindow1 instance = new MainWindow1();
-        HashMap<String, VM> expResult = new HashMap();
-        HashMap<String, VM> result = instance.getVmItems();
+        boolean expResult = true;
+        boolean result = instance.deleteItem(name);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
-
+    
     /**
-     * Test of getHubItems method, of class MainWindow1.
+     * Test of getName method, of class Hub.
      */
     @Test
-    public void testGetHubItems() {
-        System.out.println("getHubItems");
-        MainWindow1 instance = new MainWindow1();
-        HashMap<String, Hub> expResult = new HashMap();
-        HashMap<String, Hub> result = instance.getHubItems();
+    public void testGetName() {
+        System.out.println("getName");
+        Hub instance = new Hub("test");
+        String expResult = "test";
+        String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetName2() {
+        System.out.println("getName");
+        Hub instance = new Hub("test");
+        String expResult = "bob";
+        String result = instance.getName();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of setNetmask method, of class Hub.
+     */
+    @Test
+    public void testSetNetmask() {
+        System.out.println("setNetmask");
+        String netmask = "255.255.255.0";
+        Hub instance = new Hub("test");
+        instance.setNetmask(netmask);
     }
 
     /**
-     * Test of main method, of class MainWindow1.
+     * Test of setNetmask method, of class Hub.
      */
     @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = {"test"};
-        MainWindow1.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-}
+    public void testSetNetmask2() {
+        System.out.println("setNetmask");
+        String netmask = "255.255.255.0";
+        Hub instance = null;
+        instance.setNetmask(netmask);
+    }    
+    
+    /**
+     * Test of addConn method, of class NetworkItem.
+     */
+    @Test
+    public void testAddConn() {
+        System.out.println("addConn");
+        String port = "23";
+        String conn = "4";
+        NetworkItem instance = new NetworkItem();
+        String expResult = "Added solution 23, 4 to object null";
+        String result = instance.addConn(port, conn);
+        assertEquals(expResult, result);
+    }
+    
+    
+    @Test
+    public void testAddConn2() {
+        System.out.println("addConn");
+        String port = "4";
+        String conn = "6";
+        NetworkItem instance = new NetworkItem();
+        String expResult = "23,6";
+        String result = instance.addConn(port, conn);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getDescription method, of class configFilter.
+     */
+    @Test
+    public void testGetDescription() {
+        System.out.println("getDescription");
+        configFilter instance = new configFilter();
+        String expResult = "Config files (*.cfg)";
+        String result = instance.getDescription();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetDescription2() {
+        System.out.println("getDescription");
+        configFilter instance = new configFilter();
+        String expResult = "test";
+        String result = instance.getDescription();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSetEth0() {
+        System.out.println("setEth0");
+        String eth0 = "192.168.10.2";
+        VM instance = new VM("test");
+        instance.setEth0(eth0);
+    }
+    
+    /**
+     * Test of setEth0 method, of class VM.
+     */
+    @Test
+    public void testSetEth02() {
+        System.out.println("setEth0");
+        String eth0 = "192.168.10.4";
+        VM instance = null;
+        instance.setEth0(eth0);
+    }
 }

@@ -26,21 +26,7 @@ public class HubTest {
     @AfterClass
     public static void tearDownClass() {
     }
-
-    /**
-     * Test of generateString method, of class Hub.
-     */
-    @Test
-    public void testGenerateString() {
-        System.out.println("generateString");
-        Hub instance = new Hub("test");
-        String expResult = "test";
-        String result = instance.generateString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of getName method, of class Hub.
      */
@@ -51,167 +37,36 @@ public class HubTest {
         String expResult = "test";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setName method, of class Hub.
-     */
     @Test
-    public void testSetName() {
-        System.out.println("setName");
-        String name = "test";
+    public void testGetName2() {
+        System.out.println("getName");
         Hub instance = new Hub("test");
-        instance.setName(name);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getInf method, of class Hub.
-     */
-    @Test
-    public void testGetInf() {
-        System.out.println("getInf");
-        Hub instance = null;
-        String expResult = "";
-        String result = instance.getInf();
+        String expResult = "bob";
+        String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of setInf method, of class Hub.
-     */
-    @Test
-    public void testSetInf() {
-        System.out.println("setInf");
-        String inf = "";
-        Hub instance = null;
-        instance.setInf(inf);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of generateInf method, of class Hub.
-     */
-    @Test
-    public void testGenerateInf() {
-        System.out.println("generateInf");
-        Hub instance = null;
-        instance.generateInf();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addInf method, of class Hub.
-     */
-    @Test
-    public void testAddInf() {
-        System.out.println("addInf");
-        String string = "";
-        Hub instance = null;
-        instance.addInf(string);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeInf method, of class Hub.
-     */
-    @Test
-    public void testRemoveInf() {
-        System.out.println("removeInf");
-        String string = "";
-        Hub instance = null;
-        instance.removeInf(string);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeVM method, of class Hub.
-     */
-    @Test
-    public void testRemoveVM() {
-        System.out.println("removeVM");
-        String name = "test";
-        Hub instance = new Hub("test");
-        instance.removeVM(name);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSubnet method, of class Hub.
-     */
-    @Test
-    public void testGetSubnet() {
-        System.out.println("getSubnet");
-        Hub instance = null;
-        String expResult = "";
-        String result = instance.getSubnet();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setSubnet method, of class Hub.
-     */
-    @Test
-    public void testSetSubnet() {
-        System.out.println("setSubnet");
-        String subnet = "";
-        Hub instance = null;
-        instance.setSubnet(subnet);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNetmask method, of class Hub.
-     */
-    @Test
-    public void testGetNetmask() {
-        System.out.println("getNetmask");
-        Hub instance = null;
-        String expResult = "";
-        String result = instance.getNetmask();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of setNetmask method, of class Hub.
      */
     @Test
     public void testSetNetmask() {
         System.out.println("setNetmask");
-        String netmask = "";
-        Hub instance = null;
+        String netmask = "255.255.255.0";
+        Hub instance = new Hub("test");
         instance.setNetmask(netmask);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getInternal method, of class Hub.
+     * Test of setNetmask method, of class Hub.
      */
     @Test
-    public void testGetInternal() {
-        System.out.println("getInternal");
-        Hub instance = new Hub("test");
-        String expResult = "test";
-        String result = instance.getInternal();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    public void testSetNetmask2() {
+        System.out.println("setNetmask");
+        String netmask = "255.255.255.0";
+        Hub instance = null;
+        instance.setNetmask(netmask);
     }
-    
 }

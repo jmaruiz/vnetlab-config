@@ -29,32 +29,23 @@ public class configFilterTest {
     }
 
     /**
-     * Test of accept method, of class configFilter.
-     */
-    @Test
-    public void testAccept() {
-        System.out.println("accept");
-        File file = null;
-        configFilter instance = new configFilter();
-        boolean expResult = false;
-        boolean result = instance.accept(file);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getDescription method, of class configFilter.
      */
     @Test
     public void testGetDescription() {
         System.out.println("getDescription");
         configFilter instance = new configFilter();
-        String expResult = "";
+        String expResult = "Config files (*.cfg)";
         String result = instance.getDescription();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
     
+    @Test
+    public void testGetDescription2() {
+        System.out.println("getDescription");
+        configFilter instance = new configFilter();
+        String expResult = "test";
+        String result = instance.getDescription();
+        assertEquals(expResult, result);
+    }
 }
