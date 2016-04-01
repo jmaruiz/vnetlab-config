@@ -5,14 +5,10 @@
         <group>
             <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/MainWindow1Test.java</file>
             <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/HubTest.java</file>
-            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/src/configurator/Parser.java</file>
             <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/VMTest.java</file>
-            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/ParserTest.java</file>
-            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/src/configurator/Hub.java</file>
             <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/NetworkItemTest.java</file>
             <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/configFilterTest.java</file>
-            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/WriterTest.java</file>
-            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/EditWindowHubTest.java</file>
+            <file>file:/C:/Users/Edison/Desktop/vnetlab-config/Configurator/test/configurator/ConfiguratorSuite.java</file>
         </group>
     </open-files>
 </project-private>
