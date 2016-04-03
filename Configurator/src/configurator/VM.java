@@ -105,22 +105,64 @@ public class VM {
     public String getEth0() {
         return eth0;
     }
-
-    public void setEth0(String eth0) {
-        this.eth0 = eth0;
-    }
+    
     public String getEth1() {
         return eth1;
     }
 
-    public void setEth1(String eth1) {
-        this.eth2 = eth1;
-    }
     public String getEth2() {
         return eth2;
     }
-
-    public void setEth2(String eth2) {
-        this.eth2 = eth2;
+    
+    public boolean setEth0(String eth0) {
+        if (validIP(eth0)) {
+            this.eth0 = eth0;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean setEth1(String eth1) {
+        if (validIP(eth1)) {
+            this.eth1 = eth1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean setEth2(String eth2) {
+        if (validIP(eth2)) {
+            this.eth2 = eth2;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean validIP (String ip) {
+        try {
+            if ( ip == null || ip.isEmpty() ) {
+                return true;
+            }
+            String[] parts = ip.split( "\\." );
+            if ( parts.length != 4 ) {
+                return false;
+            }
+            for ( String s : parts ) {
+                int i = Integer.parseInt( s );
+                if ( (i < 0) || (i > 255) ) {
+                    return false;
+                }
+            }
+            if ( ip.endsWith(".") ) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }
+    

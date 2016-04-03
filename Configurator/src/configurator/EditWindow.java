@@ -301,11 +301,15 @@ public class EditWindow extends javax.swing.JFrame {
         netItem.setVer(this.verField.getText());
         netItem.setSrc(this.srcField.getText());
         netItem.setOs(this.osField.getText());
-        netItem.setEth0(this.eth0Field.getText());
-        netItem.setEth1(this.eth1Field.getText());
-        netItem.setEth2(this.eth2Field.getText());
+        boolean a = netItem.setEth0(this.eth0Field.getText());
+        boolean b = netItem.setEth1(this.eth1Field.getText());
+        boolean c = netItem.setEth2(this.eth2Field.getText());
         
-        mainWindow.setConsole(netItem.name + " has been updated.");
+        if (a && b && c) {
+            mainWindow.setConsole(netItem.name + " has been updated.");
+        } else {
+            mainWindow.setConsole("One or more of your eth port IPs were invalid.");
+        }
         this.dispose();
     }
     

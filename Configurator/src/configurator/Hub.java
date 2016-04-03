@@ -98,19 +98,53 @@ public class Hub {
         return subnet;
     }
 
-    public void setSubnet(String subnet) {
-        this.subnet = subnet;
+    public boolean setSubnet(String subnet) {
+        if (validIP(subnet)) {
+            this.subnet = subnet;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getNetmask() {
         return netmask;
     }
 
-    public void setNetmask(String netmask) {
-        this.netmask = netmask;
+    public boolean setNetmask(String netmask) {
+        if (validIP(netmask)) {
+            this.netmask = netmask;
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public String getInternal() {
         return internal;
+    }
+    
+    public boolean validIP (String ip) {
+        try {
+            if ( ip == null || ip.isEmpty() ) {
+                return true;
+            }
+            String[] parts = ip.split( "\\." );
+            if ( parts.length != 4 ) {
+                return false;
+            }
+            for ( String s : parts ) {
+                int i = Integer.parseInt( s );
+                if ( (i < 0) || (i > 255) ) {
+                    return false;
+                }
+            }
+            if ( ip.endsWith(".") ) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }

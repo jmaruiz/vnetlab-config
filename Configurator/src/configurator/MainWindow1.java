@@ -388,6 +388,7 @@ public class MainWindow1 extends javax.swing.JFrame {
             
             try {
                 configurator.Writer.writeCfg(finalstr, new File(file.getAbsolutePath() ));
+                this.setConsole("File saved.");
             } catch (IOException ex) {
                 Logger.getLogger(MainWindow1.class.getName()).log(Level.SEVERE, null, ex);
             }

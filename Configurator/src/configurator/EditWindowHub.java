@@ -71,6 +71,7 @@ public class EditWindowHub extends javax.swing.JFrame {
         jLabel10.setText("Mask:");
 
         infField.setEditable(false);
+        infField.setBackground(new java.awt.Color(153, 153, 153));
 
         delete.setText("Delete");
         delete.addActionListener(new java.awt.event.ActionListener() {
@@ -213,10 +214,14 @@ public class EditWindowHub extends javax.swing.JFrame {
     
     public void setNetItemProps() {        
         netItem.setInf(this.infField.getText());
-        netItem.setSubnet(this.subnetField.getText());
-        netItem.setNetmask(this.maskField.getText());
+        boolean a = netItem.setSubnet(this.subnetField.getText());
+        boolean b = netItem.setNetmask(this.maskField.getText());
         
-        mainWindow.setConsole(netItem.name + " has been updated.");
+        if (a && b) {
+            mainWindow.setConsole(netItem.name + " has been updated.");
+        } else {
+            mainWindow.setConsole("Subnet, mask, or both values may be incorrect.");
+        }
         this.dispose();
     }
 
