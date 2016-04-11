@@ -55,6 +55,8 @@ public class MainWindow1 extends javax.swing.JFrame {
         fileChooser.setFileFilter(new configFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(619, 500));
+        setPreferredSize(new java.awt.Dimension(619, 500));
 
         newVm.setText("New VM");
         newVm.addActionListener(new java.awt.event.ActionListener() {
