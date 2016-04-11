@@ -206,7 +206,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void publishItem(VM item) {
-        mainPanel.setLayout(new FlowLayout(1, 1, 1));
+        mainPanel.setLayout(new FlowLayout(1, 20, 20));
         JButton button = new JButton(item.name);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
