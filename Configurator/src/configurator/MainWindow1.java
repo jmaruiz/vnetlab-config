@@ -41,8 +41,10 @@ public class MainWindow1 extends javax.swing.JFrame {
         newHub = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         consoleLbl = new javax.swing.JLabel();
-        scroller = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
+        hubPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -55,8 +57,8 @@ public class MainWindow1 extends javax.swing.JFrame {
         fileChooser.setFileFilter(new configFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(619, 500));
-        setPreferredSize(new java.awt.Dimension(619, 500));
+        setMinimumSize(new java.awt.Dimension(775, 500));
+        setPreferredSize(new java.awt.Dimension(775, 500));
 
         newVm.setText("New VM");
         newVm.addActionListener(new java.awt.event.ActionListener() {
@@ -74,21 +76,37 @@ public class MainWindow1 extends javax.swing.JFrame {
 
         jLabel1.setText("Console:");
 
-        mainPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        mainPanel.setPreferredSize(new java.awt.Dimension(500, 400));
+        jScrollPane1.setHorizontalScrollBar(null);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+        mainPanel.setPreferredSize(new java.awt.Dimension(345, 0));
+        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        hubPanel.setMaximumSize(new java.awt.Dimension(350, 32767));
+        hubPanel.setPreferredSize(new java.awt.Dimension(345, 0));
+        hubPanel.setLayout(new javax.swing.BoxLayout(hubPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(hubPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(hubPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        scroller.setViewportView(mainPanel);
+        jScrollPane1.setViewportView(jPanel1);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -146,17 +164,18 @@ public class MainWindow1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scroller, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newVm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newHub)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 613, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,13 +184,13 @@ public class MainWindow1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newVm)
                     .addComponent(newHub))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scroller, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(consoleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(consoleLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -190,6 +209,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                     VM item = new VM(name);
                     vmMap.put(name, item);
                     publishItem(item);
+                    this.setConsole("VM " + name + " created successfully.");
                     break;
                 }
             case "hub":
@@ -197,6 +217,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                     Hub item = new Hub(name);
                     hubMap.put(name, item);
                     publishItem(item);
+                    this.setConsole("Hub " + name + " created successfully.");
                     break;
                 }
             default:
@@ -206,10 +227,12 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void publishItem(VM item) {
-        mainPanel.setLayout(new FlowLayout(1, 20, 20));
+        //mainPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20));
+        //mainPanel.setLayout(new BoxLayout(mainPanel, 1));
         JButton button = new JButton(item.name);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonsMap.put(item.name, button);
         VM net = vmMap.get(item.name);
         MainWindow1 main = this;
@@ -233,10 +256,12 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void publishItem(Hub item) {
-        mainPanel.setLayout(new FlowLayout(1, 20, 20));
+        //hubPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        //hubPanel.setLayout(new BoxLayout(hubPanel, 1));
         JButton button = new JButton(item.name);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonsMap.put(item.name, button);
         Hub net = hubMap.get(item.name);
         MainWindow1 main = this;
@@ -252,8 +277,8 @@ public class MainWindow1 extends javax.swing.JFrame {
             }
         });
         button.setIcon(hubIcon);
-        mainPanel.add(button);
-        mainPanel.revalidate();
+        hubPanel.add(button);
+        hubPanel.revalidate();
         validate();
     }
     
@@ -318,6 +343,7 @@ public class MainWindow1 extends javax.swing.JFrame {
               for (Hub item : hubMap.values()) {
                   publishItem(item);
               }
+              this.setConsole("File opened successfully.");
             } catch (IOException ex) {
               System.out.println("problem accessing file " + file.getAbsolutePath());
             }
@@ -443,14 +469,16 @@ public class MainWindow1 extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JPanel hubPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newHub;
     private javax.swing.JButton newVm;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JScrollPane scroller;
     // End of variables declaration//GEN-END:variables
 
 }
