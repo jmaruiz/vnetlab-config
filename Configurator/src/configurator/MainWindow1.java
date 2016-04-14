@@ -8,6 +8,7 @@ package configurator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -309,6 +310,39 @@ public class MainWindow1 extends javax.swing.JFrame {
         }
     }
     
+    public void connectAll() {
+        System.out.println("connectall called");
+        for (VM vm : vmMap.values()) {
+            HashMap<String, String> conns = vm.connections;
+            for (String s : conns.values()) {
+                s = s.substring(3);
+                for (Hub hub : hubMap.values()) {
+                    if (hub.internal.equals(s)) {
+                        connectItems(vm.name, hub.name);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void connectItems(String vm, String hub) {
+        JButton buttonVM = buttonsMap.get(vm);
+        JButton buttonHub = buttonsMap.get(hub);
+        
+        connect(buttonVM.getLocation(), buttonHub.getLocation());
+        System.out.println("connectitems called");
+    }
+    
+    public void connect(Point one, Point two) {
+        Graphics g = mainPanel.getGraphics();
+        int x1 = (int) Math.round(one.getX()) + 50;
+        int y1 = (int) Math.round(one.getY()) + 50;
+        int x2 = (int) Math.round(two.getX()) + 400;
+        int y2 = (int) Math.round(two.getY()) + 50;
+        g.drawLine(x1, y1, x2, y2);
+        System.out.println("connect called");
+    }
+    
     public void setConsole(String text) {
         consoleLbl.setText(text);
     }
@@ -343,6 +377,7 @@ public class MainWindow1 extends javax.swing.JFrame {
               for (Hub item : hubMap.values()) {
                   publishItem(item);
               }
+              this.connectAll();
               this.setConsole("File opened successfully.");
             } catch (IOException ex) {
               System.out.println("problem accessing file " + file.getAbsolutePath());
