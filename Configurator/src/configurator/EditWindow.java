@@ -329,6 +329,7 @@ public class EditWindow extends javax.swing.JFrame {
                 Hub hub = itemSet.get(name);
                 String add = item.addConn(port, "v2." + hub.getInternal());
                 hub.addInf(item.getName() + "." + port);
+                mainWindow.connectItems(item.name, hub.name);
                 mainWindow.setConsole(add);
                 this.dispose();
             } else {
