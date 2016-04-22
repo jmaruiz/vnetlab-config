@@ -24,12 +24,13 @@ public class Hub {
         this.type = "hub";
         this.name = n;
         this.inf = "";
-        this.internal = "vinf" + hubNum;
+        this.internal = "vinf" + hubNum; //internal name of hub (i.e. vinf21)
         hubNum++;
         System.out.println("New object created: " + this.type + " - " + this.name);
     }
     
     public String generateString() {
+        //generate the string of properties for this Hub to put in the .cfg file when saved
         String finalstr;
         finalstr = this.type + " " + this.name + " { \n";
         if (this.inf != null && !this.inf.equals("")) { finalstr += "\tinf : " + this.inf + " \n"; }
@@ -57,6 +58,7 @@ public class Hub {
     }
     
     public void generateInf() {
+        //generate the text to put in the inf field
         if (infList.size() > 0) {
             for (int i = 0; i < infList.size(); i++) {
                 if (i == 0) {
@@ -85,6 +87,7 @@ public class Hub {
     }
     
     public void removeVM(String name) {
+        //remove VM from infList on deletion
         for (Iterator<String> iterator = this.infList.iterator(); iterator.hasNext();) {
             String listItem = iterator.next();
             if (listItem.contains(name)) {
@@ -99,7 +102,7 @@ public class Hub {
     }
 
     public boolean setSubnet(String subnet) {
-        if (validIP(subnet)) {
+        if (validIP(subnet)) { //check if valid IP
             this.subnet = subnet;
             return true;
         } else {
@@ -112,7 +115,7 @@ public class Hub {
     }
 
     public boolean setNetmask(String netmask) {
-        if (validIP(netmask)) {
+        if (validIP(netmask)) { //check if valid IP
             this.netmask = netmask;
             return true;
         } else {
@@ -125,6 +128,7 @@ public class Hub {
     }
     
     public boolean validIP (String ip) {
+        //method to check valid IP addresses for the IP and subnet fields
         try {
             if ( ip == null || ip.isEmpty() ) {
                 return true;

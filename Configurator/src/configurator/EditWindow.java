@@ -215,24 +215,26 @@ public class EditWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void eth0ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth0ConActionPerformed
-        connect(netItem, "eth0");
+        connect(netItem, "eth0"); //run connect function the VM eth0 port
     }//GEN-LAST:event_eth0ConActionPerformed
 
     private void eth1ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth1ConActionPerformed
-        connect(netItem, "eth1");
+        connect(netItem, "eth1");//run connect function the VM eth1 port
     }//GEN-LAST:event_eth1ConActionPerformed
 
     private void eth2ConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eth2ConActionPerformed
-        connect(netItem, "eth2");
+        connect(netItem, "eth2");//run connect function the VM eth2 port
     }//GEN-LAST:event_eth2ConActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         JFrame frame = new JFrame("Confirm Delete");
-        Integer deleted = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Confirm delete.", JOptionPane.YES_NO_OPTION);
+        Integer deleted = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Confirm delete.", JOptionPane.YES_NO_OPTION); //confirm user wants to delete
         if (deleted == 0){
             if (mainWindow.deleteItem(netItem.name)){
-                this.dispose();
-            } else { System.out.println("Netitem not detected, can't delete."); }
+                this.dispose(); //close window after deletion
+            } else { 
+                System.out.println("Netitem not detected, can't delete."); 
+            }
         }
     }//GEN-LAST:event_deleteActionPerformed
 
@@ -305,12 +307,13 @@ public class EditWindow extends javax.swing.JFrame {
         boolean b = netItem.setEth1(this.eth1Field.getText());
         boolean c = netItem.setEth2(this.eth2Field.getText());
         
-        if (a && b && c) {
+        //test if all fields are properly ready to be set
+        if (a && b && c) { 
             mainWindow.setConsole(netItem.name + " has been updated.");
         } else {
             mainWindow.setConsole("One or more of your eth port IPs were invalid.");
         }
-        this.dispose();
+        this.dispose(); //close window after saving properties
     }
     
     public void connect(VM item, String port) {
@@ -318,12 +321,14 @@ public class EditWindow extends javax.swing.JFrame {
         JFrame frame = new JFrame("Connect a port to a hub.");
         String frametext = "Enter the name of the hub you want to connect ";
                frametext += item.getName() + "." + port + " to:\n";
+               
+        //echo out all the names of the hubs to give user choices
         for (String key : itemSet.keySet()) {
             Hub hub = itemSet.get(key);
             frametext += "\n" + hub.getName();
         }
         String name = JOptionPane.showInputDialog(frame, frametext);
-        if (name != null && !name.equals("")){
+        if (name != null && !name.equals("")){ //if hub name is valid make the connection
             name = name.replaceAll("\\s+","");
             if (itemSet.get(name) != null) {
                 Hub hub = itemSet.get(name);
@@ -336,7 +341,7 @@ public class EditWindow extends javax.swing.JFrame {
                 mainWindow.setConsole("ERROR: hub with the name " + name + " does not exist.");
                 this.dispose();
             }
-        } else if (name != null && name.equals("")) {
+        } else if (name != null && name.equals("")) { //if name is empty remove the connection
             String remove = item.removeConn(port);
             for (Hub hub : itemSet.values()) {
                 hub.removeInf(item.getName() + "." + port);

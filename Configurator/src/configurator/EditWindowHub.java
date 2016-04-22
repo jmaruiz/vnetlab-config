@@ -151,7 +151,7 @@ public class EditWindowHub extends javax.swing.JFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         JFrame frame = new JFrame("Confirm Delete");
-        Integer deleted = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Confirm delete.", JOptionPane.YES_NO_OPTION);
+        Integer deleted = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Confirm delete.", JOptionPane.YES_NO_OPTION); //confirm dialog before delete
         if (deleted == 0){
             if (mainWindow.deleteItem(netItem.name)){
                 this.dispose();
@@ -217,6 +217,7 @@ public class EditWindowHub extends javax.swing.JFrame {
         boolean a = netItem.setSubnet(this.subnetField.getText());
         boolean b = netItem.setNetmask(this.maskField.getText());
         
+        //check if props are ok before saving
         if (a && b) {
             mainWindow.setConsole(netItem.name + " has been updated.");
         } else {

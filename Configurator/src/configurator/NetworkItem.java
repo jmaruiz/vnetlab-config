@@ -3,6 +3,15 @@ package configurator;
 
 import java.util.HashMap;
 
+//
+//
+//
+//NOT USED. SWITCHED TO VM AND HUB CLASSES
+//
+//
+//
+//
+
 public class NetworkItem {
     public String type, name, os, ver, src, eth0, eth1, eth2; //VM attributes
     public String inf, subnet, netmask, internal; //Hub attributes

@@ -207,6 +207,7 @@ public class MainWindow1 extends javax.swing.JFrame {
         switch (type) {
             case "vm":
                 {
+                    //create new VM by name, put in hashmap, and publish button to main window
                     VM item = new VM(name);
                     vmMap.put(name, item);
                     publishItem(item);
@@ -215,6 +216,7 @@ public class MainWindow1 extends javax.swing.JFrame {
                 }
             case "hub":
                 {
+                    //create new hub by name, put in hashmap, and publish button to main window
                     Hub item = new Hub(name);
                     hubMap.put(name, item);
                     publishItem(item);
@@ -222,14 +224,14 @@ public class MainWindow1 extends javax.swing.JFrame {
                     break;
                 }
             default:
+                //if not vm or hub, error out and move on
                 System.out.println("Invalid item type. Should be vm or hub.");
                 break;
         }
     }
     
     public void publishItem(VM item) {
-        //mainPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20));
-        //mainPanel.setLayout(new BoxLayout(mainPanel, 1));
+        //publish the VM to the page via a clickable JButton
         JButton button = new JButton(item.name);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -237,6 +239,8 @@ public class MainWindow1 extends javax.swing.JFrame {
         buttonsMap.put(item.name, button);
         VM net = vmMap.get(item.name);
         MainWindow1 main = this;
+        
+        //add action listener to click to pull up editwindow
         button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -257,8 +261,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void publishItem(Hub item) {
-        //hubPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        //hubPanel.setLayout(new BoxLayout(hubPanel, 1));
+        //publish Hub to window via a JButton
         JButton button = new JButton(item.name);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -266,10 +269,11 @@ public class MainWindow1 extends javax.swing.JFrame {
         buttonsMap.put(item.name, button);
         Hub net = hubMap.get(item.name);
         MainWindow1 main = this;
+        
+        //add action listener to click to pull up editwindowhub
         button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-              //System.out.println(net.name);
               EditWindowHub editor = new EditWindowHub(main);
               editor.changeName(net.name); editor.changeInf(net.inf); 
               editor.changeSubnet(net.subnet); editor.changeMask(net.netmask);
@@ -284,7 +288,8 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public boolean deleteItem (String name) {
-        if (vmMap.get(name) != null) {
+        //properly delete a network item based on name
+        if (vmMap.get(name) != null) { //check if it is a hub
             for (Hub hub : hubMap.values()) {
                 hub.removeVM(name);
             }
@@ -294,7 +299,7 @@ public class MainWindow1 extends javax.swing.JFrame {
             vmMap.remove(name);
             this.setConsole(name + " has been removed successfully.");
             return true;
-        } else if (hubMap.get(name) != null) {
+        } else if (hubMap.get(name) != null) { //check if it is a hub
             for (VM vm : vmMap.values()) {
                 vm.removeHub(hubMap.get(name).getInternal());
             }
@@ -304,13 +309,14 @@ public class MainWindow1 extends javax.swing.JFrame {
             hubMap.remove(name);
             this.setConsole(name + " has been removed successfully.");
             return true;
-        } else {
+        } else { //item not found
             this.setConsole("That network item doesn't exist!");
             return false;
         }
     }
     
     public void connectAll() {
+        //connect all vms and hubs using the solution string when parsing an open file
         System.out.println("connectall called");
         for (VM vm : vmMap.values()) {
             HashMap<String, String> conns = vm.connections;
@@ -326,6 +332,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void connectItems(String vm, String hub) {
+        //connect a vm to a hub based on name
         JButton buttonVM = buttonsMap.get(vm);
         JButton buttonHub = buttonsMap.get(hub);
         
@@ -334,6 +341,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void connect(Point one, Point two) {
+        //draw the line to visually show the connection between vm and hub
         Graphics g = mainPanel.getGraphics();
         int x1 = (int) Math.round(one.getX()) + 50;
         int y1 = (int) Math.round(one.getY()) + 50;
@@ -344,6 +352,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }
     
     public void setConsole(String text) {
+        //method to set the user facing console text to the input string
         consoleLbl.setText(text);
     }
     
@@ -360,12 +369,12 @@ public class MainWindow1 extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        // TODO add your handling code here:
+        // open option clicked in file window
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try {
-              // What to do with the file, e.g. display it in a TextArea
+              // parse the chosen file
               Parser parser = new Parser(new FileReader(file.getAbsolutePath()));
               
               vmMap = parser.getVmMap();
@@ -383,11 +392,13 @@ public class MainWindow1 extends javax.swing.JFrame {
               System.out.println("problem accessing file " + file.getAbsolutePath());
             }
         } else {
+            //user cancels open file dialog
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void newVmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newVmActionPerformed
+        //click new VM, asks for name and creates it
         JFrame frame = new JFrame("Create a new vm");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
         consoleLbl.setText("");
@@ -402,6 +413,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }//GEN-LAST:event_newVmActionPerformed
 
     private void newHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newHubActionPerformed
+        //click on new hub, asks for name and creates it
         JFrame frame = new JFrame("Create a new hub");
         String name = JOptionPane.showInputDialog(frame, "Enter a name:");
         consoleLbl.setText("");
@@ -416,6 +428,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }//GEN-LAST:event_newHubActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        //about menu option, displays group info
         JFrame frame = new JFrame("About Configurator");
         String aboutString = 
             "This app was created and programmed for CSET 3600 (University of Toledo)\n"
@@ -425,6 +438,7 @@ public class MainWindow1 extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        //write config file based on current data in program
         Writer writer = new Writer();
         String finalstr;
         finalstr = "";
@@ -433,21 +447,24 @@ public class MainWindow1 extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             
+            //generate string for every VM, add to main string
             for (VM item : vmMap.values()) {
                 finalstr += item.generateString();
             }
+            //generate string for every hub, add to main string
             for (Hub item : hubMap.values()) {
                 finalstr += item.generateString();
             }
             finalstr += "partial_solution {\n";
+            //add string containing solutions/connections for all VMs
             for (VM item : vmMap.values()) {
                 finalstr += item.getSolutionString();
             }
             if (finalstr.charAt(finalstr.length()-2)==',') {
                 finalstr = finalstr.substring(0, finalstr.length()-2);
             }
+            //write ending curly braces to complete .cfg syntax
             finalstr += "\n}\n";
-            
             
             try {
                 configurator.Writer.writeCfg(finalstr, new File(file.getAbsolutePath() ));

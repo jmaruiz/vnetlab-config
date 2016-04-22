@@ -18,7 +18,6 @@ public class Writer {
 	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
  
 	for (int i = 0; i < 10; i++) {
-		bw.write("else");
 		bw.newLine();
 	}
  
@@ -29,11 +28,12 @@ public class Writer {
         if (!file.getAbsolutePath().contains(".cfg")) {
             file = new File(file.getAbsolutePath() + ".cfg");
         }
+        //open new file output stream
         FileOutputStream fos = new FileOutputStream(file);
 	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
         
+        //write string from generator to it, and close file
 	bw.write(input);
-        //bw.newLine();
 	bw.close();
     }
 }

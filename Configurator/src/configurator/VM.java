@@ -23,6 +23,7 @@ public class VM {
     }
     
     public String generateString() {
+        //generate string to use for the .cfg file when saved
         String finalstr;
         finalstr = this.type + " " + this.name + " { \n";
         if (this.os != null && !this.os.equals("")) { finalstr += "\tos : " + this.os + " \n"; }
@@ -37,6 +38,7 @@ public class VM {
     }
     
     public String getSolutionString() {
+        //generate string for solution portion of .cfg file on save
         String finalstr = "";
         for (String port : connections.keySet()) {
             finalstr += "(" + this.name + "." + port + " " + connections.get(port) + "),\n";
@@ -45,6 +47,7 @@ public class VM {
     }
     
     public String addConn(String port, String conn) {
+        //add connection to a hub
         if (connections.get(port) != null) {
             return "That port is already connected to something.";
         } else {
@@ -54,6 +57,7 @@ public class VM {
     }
     
     public String removeConn(String port) {
+        //remove connection to hub
         if (connections.get(port) != null) {
             connections.remove(port);
             return "Solution removed for " + this.name + "." + port;
@@ -63,6 +67,7 @@ public class VM {
     }
     
     public void removeHub (String hub) {
+        //check connections to remove Hub when deleted
         for (String port : connections.keySet()) {
             if (connections.get(port).contains(hub)) {
                 connections.remove(port);
@@ -115,7 +120,7 @@ public class VM {
     }
     
     public boolean setEth0(String eth0) {
-        if (validIP(eth0)) {
+        if (validIP(eth0)) { //check valid IP
             this.eth0 = eth0;
             return true;
         } else {
@@ -124,7 +129,7 @@ public class VM {
     }
     
     public boolean setEth1(String eth1) {
-        if (validIP(eth1)) {
+        if (validIP(eth1)) { //check valid IP
             this.eth1 = eth1;
             return true;
         } else {
@@ -133,7 +138,7 @@ public class VM {
     }
     
     public boolean setEth2(String eth2) {
-        if (validIP(eth2)) {
+        if (validIP(eth2)) { //check valid IP
             this.eth2 = eth2;
             return true;
         } else {
@@ -142,6 +147,7 @@ public class VM {
     }
     
     public boolean validIP (String ip) {
+        //method to check valid IP for eth ports on VM
         try {
             if ( ip == null || ip.isEmpty() ) {
                 return true;

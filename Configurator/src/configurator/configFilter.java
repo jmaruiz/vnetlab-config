@@ -14,10 +14,12 @@ import java.io.File;
 public class configFilter extends javax.swing.filechooser.FileFilter {
     @Override
     public boolean accept(File file) {
+        //only accept files of .cfg extension
         return file.isDirectory() || file.getAbsolutePath().endsWith(".cfg");
     }
     @Override
     public String getDescription() {
+        //prints description of accepted files
         return "Config files (*.cfg)";
     }
 }
